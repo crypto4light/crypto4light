@@ -1,0 +1,179 @@
+---
+layout: default
+---
+
+<article class="section">
+  <div class="container">
+
+    <div class="market-article">
+
+      <a href="{{ '/market-analysis/' | relative_url }}" class="back-link">
+        ← Back to Market Analysis
+      </a>
+
+      <header class="market-article-header">
+        <span class="eyebrow">CRYPTO4LIGHT MARKET ANALYSIS</span>
+
+        <h1>{{ page.title | escape }}</h1>
+
+        <div class="market-article-date">
+          {{ page.date | date: "%B %d, %Y" }}
+        </div>
+      </header>
+
+      {% if page.youtube_id %}
+      <div class="market-video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/{{ page.youtube_id | escape }}"
+          title="{{ page.title | escape }}"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+      {% endif %}
+
+      {% if page.excerpt_text %}
+      <p class="market-article-intro">
+        {{ page.excerpt_text | escape }}
+      </p>
+      {% endif %}
+
+      <div class="market-article-content">
+        {{ content }}
+      </div>
+
+      {% if page.assets %}
+      <div class="market-article-assets">
+        <h2>Assets Covered</h2>
+        <div class="market-tags">
+          {% for asset in page.assets %}
+            <span class="market-tag">{{ asset | escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if page.keywords %}
+      <div class="market-article-keywords">
+        <span>Topics:</span>
+        {% for keyword in page.keywords %}
+          {{ keyword | escape }}{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="market-article-footer">
+        <a href="{{ '/market-analysis/' | relative_url }}">
+          Explore More Market Analysis →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</article>
+
+<style>
+.market-article {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-block;
+  color: #FFD43B;
+  text-decoration: none;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.market-article-header {
+  margin-bottom: 28px;
+}
+
+.market-article-header h1 {
+  margin: 14px 0;
+}
+
+.market-article-date {
+  color: #929EAC;
+  font-size: 14px;
+}
+
+.market-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #111720;
+  margin-bottom: 30px;
+}
+
+.market-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.market-article-intro {
+  color: #C4CDD7;
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.market-article-content {
+  color: #C4CDD7;
+  line-height: 1.8;
+}
+
+.market-article-content h2,
+.market-article-content h3 {
+  color: #F0F3F6;
+  margin-top: 32px;
+}
+
+.market-article-assets {
+  margin-top: 36px;
+}
+
+.market-article-assets h2 {
+  font-size: 18px;
+}
+
+.market-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.market-tag {
+  padding: 7px 12px;
+  border: 1px solid #303B49;
+  border-radius: 20px;
+  color: #FFD43B;
+  font-size: 13px;
+}
+
+.market-article-keywords {
+  margin-top: 25px;
+  color: #929EAC;
+  font-size: 13px;
+}
+
+.market-article-footer {
+  margin-top: 45px;
+  padding-top: 24px;
+  border-top: 1px solid #242D39;
+}
+
+.market-article-footer a {
+  color: #FFD43B;
+  text-decoration: none;
+  font-weight: 600;
+}
+</style>
