@@ -42,7 +42,7 @@ defaults:
   - scope:
       type: market_analysis
     values:
-      layout: default
+      layout: market-analysis
 
 exclude:
   - README.md
