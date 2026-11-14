@@ -1,0 +1,43 @@
+
+title: Crypto4light
+description: Independent Crypto Market Analysis, TradingView Indicators, Research and Educational Resources.
+url: "https://crypto4light.com"
+baseurl: ""
+
+lang: en
+timezone: Europe/Kyiv
+
+markdown: kramdown
+permalink: /:categories/:title/
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+collections:
+  indicators:
+    output: true
+    permalink: /indicators/:name/
+  education:
+    output: true
+    permalink: /education/:name/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      type: indicators
+    values:
+      layout: page
+  - scope:
+      type: education
+    values:
+      layout: page
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
