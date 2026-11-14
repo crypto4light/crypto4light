@@ -22,6 +22,9 @@ collections:
   education:
     output: true
     permalink: /education/:name/
+  market_analysis:
+    output: true
+    permalink: /market-analysis/:name/
 
 defaults:
   - scope:
@@ -36,6 +39,10 @@ defaults:
       type: education
     values:
       layout: page
+  - scope:
+      type: market_analysis
+    values:
+      layout: default
 
 exclude:
   - README.md
