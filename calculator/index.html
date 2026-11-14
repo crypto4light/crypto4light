@@ -1,0 +1,749 @@
+---
+layout: default
+title: Crypto Calculator
+description: Use the Crypto4light crypto calculator to estimate market capitalization, investment outcomes, ROI, DCA average buy price, partial take profit and future price scenarios.
+permalink: /calculator/
+---
+
+<section class="section calculator-page">
+    <div class="container">
+        <div class="eyebrow">Trading Tools & Investment Planning</div>
+        <h1>Crypto Calculator</h1>
+        <p class="lead">Explore market capitalization, investment outcomes, DCA strategies and potential price scenarios with a collection of practical crypto calculators.</p>
+
+        <div class="calculator">
+            <style>
+            .calculator {
+                color: var(--text);
+            }
+
+            .calculator .wrap {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .calculator .panel {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                padding: 26px;
+                margin: 8px 0 20px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+            }
+
+            .calculator h1 {
+                color: var(--text);
+                font-size: clamp(24px, 3vw, 34px);
+                line-height: 1.2;
+                text-align: left;
+                margin: 0 0 20px;
+                font-weight: 700;
+                letter-spacing: -.7px;
+            }
+
+            .calculator h2 {
+                color: var(--text);
+                font-size: 24px;
+                margin: 0 0 8px;
+            }
+
+            .calculator .sub {
+                color: var(--muted);
+                font-size: 14px;
+                margin: 0 0 18px;
+            }
+
+            .calculator .field {
+                margin: 14px 0;
+            }
+
+            .calculator label {
+                display: block;
+                color: var(--muted);
+                font-size: 15px;
+                margin-bottom: 8px;
+            }
+
+            .calculator input {
+                width: 100%;
+                min-width: 0;
+                height: 48px;
+                padding: 10px 12px;
+                border: 1px solid var(--border);
+                border-radius: 9px;
+                background: #0b0e13;
+                color: var(--text);
+                font-size: 16px;
+                outline: none;
+            }
+
+            .calculator input:focus {
+                border-color: var(--accent);
+                box-shadow: 0 0 0 2px rgba(255, 212, 59, .12);
+            }
+
+            .calculator input[readonly] {
+                background: #151c25;
+                color: var(--accent);
+            }
+
+            .calculator .grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0 18px;
+            }
+
+            .calculator .results {
+                display: none;
+                margin-top: 20px;
+                font-size: 16px;
+                line-height: 1.8;
+                background: #0b0e13;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 14px 16px;
+            }
+
+            .calculator .results.is-visible {
+                display: block;
+            }
+
+            .calculator .table {
+                display: none;
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 14px;
+                font-size: 14px;
+                color: var(--text);
+            }
+
+            .calculator .table.is-visible {
+                display: table;
+            }
+
+            .calculator .result-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 8px;
+                border-bottom: 1px solid var(--border);
+                padding: 5px 0;
+            }
+
+            .calculator .result-row:last-child {
+                border-bottom: 0;
+            }
+
+            .calculator .result-row strong {
+                color: var(--muted);
+                font-weight: 600;
+            }
+
+            .calculator .value {
+                text-align: right;
+                font-weight: 700;
+                color: var(--text);
+            }
+
+            .calculator .tokens,
+            .calculator .positive {
+                color: #72d6a0;
+                font-weight: 700;
+            }
+
+            .calculator .negative {
+                color: #ff7777;
+            }
+
+            .calculator .hint {
+                color: var(--muted);
+                font-size: 13px;
+                line-height: 1.5;
+                margin-top: 12px;
+            }
+
+            .calculator .table th,
+            .calculator .table td {
+                padding: 11px 9px;
+                border-bottom: 1px solid var(--border);
+                text-align: right;
+            }
+
+            .calculator .table th:first-child,
+            .calculator .table td:first-child {
+                text-align: left;
+            }
+
+            .calculator .table th {
+                color: var(--muted);
+                font-weight: 600;
+            }
+
+            .calculator .dca-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                margin: 10px 0;
+            }
+
+            .calculator .dca-row label {
+                font-size: 14px;
+            }
+
+            .calculator .pill {
+                display: inline-block;
+                background: rgba(255, 212, 59, .12);
+                border: 1px solid rgba(255, 212, 59, .28);
+                border-radius: 20px;
+                padding: 5px 10px;
+                font-size: 12px;
+                color: var(--accent);
+                margin-bottom: 12px;
+            }
+
+            @media (max-width: 650px) {
+                .calculator .panel {
+                    padding: 20px 16px;
+                    border-radius: 12px;
+                }
+
+                .calculator .grid {
+                    grid-template-columns: 1fr;
+                    gap: 0;
+                }
+
+                .calculator .dca-row {
+                    gap: 8px;
+                }
+
+                .calculator .table {
+                    font-size: 12px;
+                }
+
+                .calculator .table th,
+                .calculator .table td {
+                    padding: 8px 4px;
+                }
+
+                .calculator .results {
+                    font-size: 14px;
+                    padding: 12px;
+                }
+            }
+            </style>
+
+            <div class="wrap">
+
+                <section class="panel">
+                    <h1>Market Cap Calculator</h1>
+
+                    <div class="grid">
+                        <div class="field">
+                            <label for="supply">Total Supply:</label>
+                            <input id="supply" type="number" min="0" step="any" placeholder="Enter total supply">
+                        </div>
+
+                        <div class="field">
+                            <label for="marketPrice">Price per Coin ($):</label>
+                            <input id="marketPrice" type="number" min="0" step="any" placeholder="Enter price per coin">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="marketCap">Market Cap:</label>
+                        <input id="marketCap" type="text" placeholder="Market cap" readonly>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h1>Investment Outcome Calculator</h1>
+
+                    <div class="grid">
+                        <div class="field">
+                            <label for="investment">Investment ($):</label>
+                            <input id="investment" type="number" min="0" step="any" placeholder="Enter investment amount">
+                        </div>
+
+                        <div class="field">
+                            <label for="buyPrice">Buy Price ($):</label>
+                            <input id="buyPrice" type="number" min="0" step="any" placeholder="Enter buy price">
+                        </div>
+
+                        <div class="field">
+                            <label for="sellPrice">Sell Price ($):</label>
+                            <input id="sellPrice" type="number" min="0" step="any" placeholder="Enter sell price">
+                        </div>
+                    </div>
+
+                    <div class="results" id="results_tokenCount" aria-live="polite">
+                        <div class="result-row">
+                            <strong>TOKENS TO BUY:</strong>
+                            <span class="value tokens" id="tokenCount">0</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>PRICE MULTIPLIER:</strong>
+                            <span class="value" id="multiplier">0.00X</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>PROFIT/LOSS:</strong>
+                            <span class="value" id="profitLoss">$0.00</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>ROI:</strong>
+                            <span class="value" id="roi">0.00%</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>TOTAL INVESTMENT:</strong>
+                            <span class="value" id="totalInvestment">$0.00</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>TOTAL EXIT AMOUNT:</strong>
+                            <span class="value" id="exitAmount">$0.00</span>
+                        </div>
+                    </div>
+
+                    <p class="hint">Estimate excludes trading fees, slippage and taxes.</p>
+                </section>
+
+                <section class="panel">
+                    <h1>Average Buy Price / DCA</h1>
+
+                    <p class="sub">Add one or more purchases. Results appear when an amount and its purchase price are entered.</p>
+
+                    <div class="dca-row">
+                        <div>
+                            <label for="dcaAmt1">Buy 1 — Amount ($)</label>
+                            <input id="dcaAmt1" type="number" min="0" step="any" placeholder="Enter amount invested">
+                        </div>
+
+                        <div>
+                            <label for="dcaPrice1">Buy 1 — Price ($)</label>
+                            <input id="dcaPrice1" type="number" min="0" step="any" placeholder="Enter purchase price">
+                        </div>
+                    </div>
+
+                    <div class="dca-row">
+                        <div>
+                            <label for="dcaAmt2">Buy 2 — Amount ($)</label>
+                            <input id="dcaAmt2" type="number" min="0" step="any" placeholder="Enter amount invested">
+                        </div>
+
+                        <div>
+                            <label for="dcaPrice2">Buy 2 — Price ($)</label>
+                            <input id="dcaPrice2" type="number" min="0" step="any" placeholder="Enter purchase price">
+                        </div>
+                    </div>
+
+                    <div class="dca-row">
+                        <div>
+                            <label for="dcaAmt3">Buy 3 — Amount ($)</label>
+                            <input id="dcaAmt3" type="number" min="0" step="any" placeholder="Enter amount invested">
+                        </div>
+
+                        <div>
+                            <label for="dcaPrice3">Buy 3 — Price ($)</label>
+                            <input id="dcaPrice3" type="number" min="0" step="any" placeholder="Enter purchase price">
+                        </div>
+                    </div>
+
+                    <div class="results" id="results_dcaTotal">
+                        <div class="result-row">
+                            <strong>TOTAL INVESTED:</strong>
+                            <span class="value" id="dcaTotal">$0.00</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>TOTAL TOKENS:</strong>
+                            <span class="value tokens" id="dcaTokens">0</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>AVERAGE BUY PRICE:</strong>
+                            <span class="value" id="avgBuy">$0.00</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h1>Partial Take Profit</h1>
+
+                    <p class="sub">Estimate a partial sale and see how many tokens remain.</p>
+
+                    <div class="grid">
+                        <div class="field">
+                            <label for="ptTokens">Token Holdings:</label>
+                            <input id="ptTokens" type="number" min="0" step="any" placeholder="Enter token holdings">
+                        </div>
+
+                        <div class="field">
+                            <label for="ptAvg">Average Buy Price ($):</label>
+                            <input id="ptAvg" type="number" min="0" step="any" placeholder="Enter average buy price">
+                        </div>
+
+                        <div class="field">
+                            <label for="ptSell">Sell Price ($):</label>
+                            <input id="ptSell" type="number" min="0" step="any" placeholder="Enter sell price">
+                        </div>
+
+                        <div class="field">
+                            <label for="ptPercent">Sell Percentage (%):</label>
+                            <input id="ptPercent" type="number" min="0" max="100" step="any" placeholder="Enter sell percentage">
+                        </div>
+                    </div>
+
+                    <div class="results" id="results_ptSellTokens">
+                        <div class="result-row">
+                            <strong>TOKENS TO SELL:</strong>
+                            <span class="value" id="ptSellTokens">0</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>SALE PROCEEDS:</strong>
+                            <span class="value" id="ptProceeds">$0.00</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>REALIZED PROFIT/LOSS:</strong>
+                            <span class="value" id="ptProfit">$0.00</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>TOKENS REMAINING:</strong>
+                            <span class="value tokens" id="ptRemaining">0</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>REMAINING POSITION VALUE:</strong>
+                            <span class="value" id="ptRemainingValue">$0.00</span>
+                        </div>
+                    </div>
+
+                    <p class="hint">Realized profit is calculated against the average-cost basis of the tokens sold; fees are not included in this section.</p>
+                </section>
+
+                <section class="panel">
+                    <h1>Future Market Cap & Token Price</h1>
+
+                    <div class="grid">
+                        <div class="field">
+                            <label for="futureSupply">Circulating / Future Supply:</label>
+                            <input id="futureSupply" type="number" min="0" step="any" placeholder="Enter supply">
+                        </div>
+
+                        <div class="field">
+                            <label for="futureCap">Target Market Cap ($):</label>
+                            <input id="futureCap" type="number" min="0" step="any" placeholder="Enter target market cap">
+                        </div>
+
+                        <div class="field">
+                            <label for="futureBuy">Current / Buy Price ($):</label>
+                            <input id="futureBuy" type="number" min="0" step="any" placeholder="Optional">
+                        </div>
+
+                        <div class="field">
+                            <label for="futureTokens">Your Token Holdings:</label>
+                            <input id="futureTokens" type="number" min="0" step="any" placeholder="Optional">
+                        </div>
+                    </div>
+
+                    <div class="results" id="results_futurePrice">
+                        <div class="result-row">
+                            <strong>TARGET TOKEN PRICE:</strong>
+                            <span class="value" id="futurePrice">$0.00</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>PRICE MULTIPLIER:</strong>
+                            <span class="value" id="futureMultiple">0.00X</span>
+                        </div>
+
+                        <div class="result-row">
+                            <strong>PORTFOLIO VALUE AT TARGET:</strong>
+                            <span class="value" id="futureValue">$0.00</span>
+                        </div>
+                    </div>
+
+                    <p class="hint">Uses the supply you enter. Choose circulating supply or future diluted supply consistently with the market-cap assumption.</p>
+                </section>
+
+                <section class="panel">
+                    <h1>Price Scenarios</h1>
+
+                    <p class="sub">Enter any scenario prices to compare potential exits using your Investment Outcome position.</p>
+
+                    <div class="grid">
+                        <div class="field">
+                            <label for="scenario1">Conservative Price ($):</label>
+                            <input id="scenario1" type="number" min="0" step="any" placeholder="Enter conservative price">
+                        </div>
+
+                        <div class="field">
+                            <label for="scenario2">Moderate Price ($):</label>
+                            <input id="scenario2" type="number" min="0" step="any" placeholder="Enter moderate price">
+                        </div>
+
+                        <div class="field">
+                            <label for="scenario3">Bullish Price ($):</label>
+                            <input id="scenario3" type="number" min="0" step="any" placeholder="Enter bullish price">
+                        </div>
+
+                        <div class="field">
+                            <label for="scenario4">Extreme Price ($):</label>
+                            <input id="scenario4" type="number" min="0" step="any" placeholder="Enter extreme price">
+                        </div>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Scenario</th>
+                                <th>Exit Value</th>
+                                <th>Profit/Loss</th>
+                                <th>ROI</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="scenarioRows"></tbody>
+                    </table>
+
+                    <p class="hint">Scenario results use the Investment Outcome Calculator's token quantity and investment amount.</p>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+const byId = id => document.getElementById(id);
+
+const num = id => {
+    const v = Number.parseFloat(byId(id).value);
+    return Number.isFinite(v) && v > 0 ? v : 0;
+};
+
+const filled = id => byId(id).value.trim() !== '';
+
+const showResults = (el, show) =>
+    el.classList.toggle('is-visible', !!show);
+
+const money = v => new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+}).format(Number.isFinite(v) ? v : 0);
+
+const qty = v => new Intl.NumberFormat('en-US', {
+    maximumFractionDigits: 8
+}).format(Number.isFinite(v) ? v : 0);
+
+const pct = v =>
+    (Number.isFinite(v) ? v : 0).toFixed(2) + '%';
+
+const setVal = (id, v) =>
+    byId(id).textContent = v;
+
+let mainTokens = 0;
+let mainInvestment = 0;
+
+function updateMarketCap() {
+    const cap = num('supply') * num('marketPrice');
+    byId('marketCap').value = cap ? money(cap) : '';
+}
+
+function updateInvestment() {
+    const ready = ['investment', 'buyPrice', 'sellPrice'].every(filled);
+
+    const investment = num('investment');
+    const buy = num('buyPrice');
+    const sell = num('sellPrice');
+
+    const results = byId('results_tokenCount');
+
+    showResults(results, ready && investment > 0 && buy > 0 && sell > 0);
+
+    mainInvestment = investment;
+    mainTokens = buy > 0 ? investment / buy : 0;
+
+    const exit = mainTokens * sell;
+    const profit = exit - investment;
+    const roi = investment > 0 ? profit / investment * 100 : 0;
+
+    setVal('tokenCount', qty(mainTokens));
+    setVal('multiplier', buy > 0 ? (sell / buy).toFixed(2) + 'X' : '—');
+    setVal('profitLoss', money(profit));
+    setVal('roi', pct(roi));
+    setVal('totalInvestment', money(investment));
+    setVal('exitAmount', money(exit));
+
+    byId('profitLoss').className =
+        'value ' + (profit > 0 ? 'positive' : profit < 0 ? 'negative' : '');
+
+    updateScenarios();
+}
+
+function updateDca() {
+    let invested = 0;
+    let tokens = 0;
+    let count = 0;
+
+    for (let i = 1; i <= 3; i++) {
+        const a = 'dcaAmt' + i;
+        const p = 'dcaPrice' + i;
+
+        if (filled(a) && filled(p) && num(a) > 0 && num(p) > 0) {
+            const amount = num(a);
+            const price = num(p);
+
+            invested += amount;
+            tokens += amount / price;
+            count++;
+        }
+    }
+
+    showResults(byId('results_dcaTotal'), count > 0);
+
+    setVal('dcaTotal', money(invested));
+    setVal('dcaTokens', qty(tokens));
+    setVal('avgBuy', money(tokens > 0 ? invested / tokens : 0));
+}
+
+function updatePartial() {
+    const ready =
+        ['ptTokens', 'ptAvg', 'ptSell', 'ptPercent'].every(filled) &&
+        num('ptTokens') > 0 &&
+        num('ptAvg') > 0 &&
+        num('ptSell') > 0;
+
+    showResults(byId('results_ptSellTokens'), ready);
+
+    const tokens = num('ptTokens');
+    const avg = num('ptAvg');
+    const sell = num('ptSell');
+    const p = Math.min(100, num('ptPercent'));
+
+    const sold = tokens * p / 100;
+    const proceeds = sold * sell;
+    const profit = proceeds - sold * avg;
+    const remaining = tokens - sold;
+
+    setVal('ptSellTokens', qty(sold));
+    setVal('ptProceeds', money(proceeds));
+    setVal('ptProfit', money(profit));
+    setVal('ptRemaining', qty(remaining));
+    setVal('ptRemainingValue', money(remaining * sell));
+
+    byId('ptProfit').className =
+        'value ' + (profit > 0 ? 'positive' : profit < 0 ? 'negative' : '');
+}
+
+function updateFuture() {
+    const supply = num('futureSupply');
+    const cap = num('futureCap');
+    const buy = num('futureBuy');
+    const tokens = num('futureTokens');
+
+    showResults(
+        byId('results_futurePrice'),
+        filled('futureSupply') &&
+        filled('futureCap') &&
+        supply > 0 &&
+        cap > 0
+    );
+
+    const price = supply > 0 ? cap / supply : 0;
+
+    setVal('futurePrice', money(price));
+    setVal('futureMultiple', buy > 0 ? (price / buy).toFixed(2) + 'X' : '—');
+    setVal('futureValue', money(price * tokens));
+}
+
+function updateScenarios() {
+    const labels = [
+        'Conservative',
+        'Moderate',
+        'Bullish',
+        'Extreme'
+    ];
+
+    const prices = [1, 2, 3, 4].map(i => num('scenario' + i));
+
+    const ready =
+        ['investment', 'buyPrice', 'sellPrice'].every(filled) &&
+        num('investment') > 0 &&
+        num('buyPrice') > 0 &&
+        [1, 2, 3, 4].some(i => filled('scenario' + i));
+
+    byId('scenarioRows')
+        .closest('table')
+        .classList.toggle('is-visible', ready);
+
+    byId('scenarioRows').innerHTML = labels
+        .filter((label, i) => filled('scenario' + (i + 1)))
+        .map(label => {
+            const i = labels.indexOf(label);
+
+            const exit = mainTokens * prices[i];
+            const profit = exit - mainInvestment;
+            const roi = mainInvestment > 0
+                ? profit / mainInvestment * 100
+                : 0;
+
+            return `<tr>
+                <td>${label}<br><span style="color:#888">${money(prices[i])}</span></td>
+                <td>${money(exit)}</td>
+                <td class="${profit > 0 ? 'positive' : profit < 0 ? 'negative' : ''}">${money(profit)}</td>
+                <td>${pct(roi)}</td>
+            </tr>`;
+        })
+        .join('');
+}
+
+const listeners = {
+    supply: updateMarketCap,
+    marketPrice: updateMarketCap,
+
+    investment: updateInvestment,
+    buyPrice: updateInvestment,
+    sellPrice: updateInvestment,
+
+    dcaAmt1: updateDca,
+    dcaPrice1: updateDca,
+    dcaAmt2: updateDca,
+    dcaPrice2: updateDca,
+    dcaAmt3: updateDca,
+    dcaPrice3: updateDca,
+
+    ptTokens: updatePartial,
+    ptAvg: updatePartial,
+    ptSell: updatePartial,
+    ptPercent: updatePartial,
+
+    futureSupply: updateFuture,
+    futureCap: updateFuture,
+    futureBuy: updateFuture,
+    futureTokens: updateFuture,
+
+    scenario1: updateScenarios,
+    scenario2: updateScenarios,
+    scenario3: updateScenarios,
+    scenario4: updateScenarios
+};
+
+Object.entries(listeners).forEach(([id, fn]) => {
+    byId(id).addEventListener('input', fn);
+});
+
+updateMarketCap();
+updateInvestment();
+updateDca();
+updatePartial();
+updateFuture();
+updateScenarios();
+</script>
