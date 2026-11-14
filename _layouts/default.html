@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    {% if page.title %}
+      {{ page.title }} | Crypto4light
+    {% else %}
+      Crypto4light | Crypto Market Analysis
+    {% endif %}
+  </title>
+
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  {% seo %}
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container nav-container">
+
+    <a class="logo" href="/">
+      CRYPTO<span>4LIGHT</span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="/indicators/">Indicators</a>
+      <a href="/calculator/">Calculator</a>
+      <a href="/market-analysis/">Market Analysis</a>
+      <a href="/education/">Education</a>
+    </nav>
+
+  </div>
+</header>
+
+<main id="main-content">
+  {{ content }}
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+
+    <div>
+      <a class="logo" href="/">
+        CRYPTO<span>4LIGHT</span>
+      </a>
+      <p>Independent Crypto Research & Analytics</p>
+    </div>
+
+    <div class="footer-copy">
+      © {{ site.time | date: "%Y" }} Crypto4light. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
