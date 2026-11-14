@@ -2,6 +2,31 @@
 layout: default
 ---
 
+{% if page.youtube_id %}
+{% assign video_description = page.excerpt_text | default: page.description | default: page.title %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ page.title | strip_html | jsonify }},
+  "description": {{ video_description | strip_html | normalize_whitespace | jsonify }},
+  "thumbnailUrl": [
+    "https://i.ytimg.com/vi/{{ page.youtube_id | escape }}/maxresdefault.jpg"
+  ],
+  "uploadDate": {{ page.date | date_to_xmlschema | jsonify }},
+  "embedUrl": "https://www.youtube-nocookie.com/embed/{{ page.youtube_id | escape }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ page.url | absolute_url | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Crypto4light"
+  }
+}
+</script>
+{% endif %}
+
 <article class="section">
   <div class="container">
 
