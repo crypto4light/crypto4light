@@ -60,9 +60,7 @@ permalink: /market-analysis/
     </div>
 
     <div class="analysis-grid" id="analysisGrid">
-
-      <!-- New video entries will appear here -->
-
+      <!-- Video entries are generated automatically -->
     </div>
 
     <div class="analysis-empty" id="analysisEmpty" hidden>
@@ -245,7 +243,20 @@ permalink: /market-analysis/
 
 <script>
 (function () {
-  const videos = [];
+  const videos = [
+    {% assign sorted_videos = site.market_analysis | sort: "date" | reverse %}
+    {% for video in sorted_videos %}
+    {
+      title: {{ video.title | jsonify }},
+      description: {{ video.excerpt_text | default: video.description | jsonify }},
+      date: {{ video.date | date: "%Y-%m-%d" | jsonify }},
+      youtubeId: {{ video.youtube_id | jsonify }},
+      url: {{ video.url | relative_url | jsonify }},
+      keywords: {{ video.keywords | jsonify }},
+      assets: {{ video.assets | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
 
   const grid = document.getElementById("analysisGrid");
   const search = document.getElementById("analysisSearch");
@@ -265,7 +276,8 @@ permalink: /market-analysis/
       const searchable = [
         video.title,
         video.description,
-        ...video.keywords
+        ...(video.keywords || []),
+        ...(video.assets || [])
       ].join(" ").toLowerCase();
 
       const matchesSearch = searchable.includes(query);
@@ -283,20 +295,26 @@ permalink: /market-analysis/
 
     grid.innerHTML = filtered.map(video => {
       const videoId = video.youtubeId;
-      const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      const thumbnail = videoId
+        ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+        : "";
 
-      return `
-        <a class="analysis-card" href="${video.url}">
-          <img
+      const imageHTML = videoId
+        ? `<img
             src="${thumbnail}"
             alt="${video.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"
             loading="lazy"
             onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"
-          >
+          >`
+        : "";
+
+      return `
+        <a class="analysis-card" href="${video.url}">
+          ${imageHTML}
           <div class="analysis-card-content">
             <div class="analysis-card-date">${video.date}</div>
             <h2>${video.title}</h2>
-            <p>${video.description}</p>
+            <p>${video.description || ""}</p>
             <span class="analysis-card-link">Read Analysis →</span>
           </div>
         </a>
