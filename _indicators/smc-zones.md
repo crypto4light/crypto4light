@@ -11,9 +11,6 @@ keywords:
   - Supply and Demand Zones
   - Crypto Market Structure
 ---
-
-# SMC Zones
-
 The Crypto4light SMC Zones indicator is a proprietary TradingView tool designed to support market structure analysis through smart money concepts.
 
 This tutorial will explain its features, settings and practical applications.
