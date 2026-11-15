@@ -1,0 +1,42 @@
+backend:
+  name: github
+  repo: crypto4light/crypto4light
+  branch: main
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "education"
+    label: "Education"
+    folder: "_education"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "YouTube ID", name: "youtube_id", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Excerpt", name: "excerpt_text", widget: "text" }
+      - { label: "Keywords", name: "keywords", widget: "list" }
+      - { label: "Article Content", name: "body", widget: "markdown" }
+
+  - name: "market_analysis"
+    label: "Market Analysis"
+    folder: "_market_analysis"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "YouTube ID", name: "youtube_id", widget: "string" }
+      - { label: "Excerpt", name: "excerpt_text", widget: "text" }
+      - label: "Assets"
+        name: "assets"
+        widget: "list"
+      - { label: "Keywords", name: "keywords", widget: "list" }
+      - { label: "Article Content", name: "body", widget: "markdown" }
