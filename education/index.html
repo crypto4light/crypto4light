@@ -5,35 +5,18 @@ description: Explore cryptocurrency educational guides, trading tutorials, techn
 permalink: /education/
 ---
 
-<section class="hero">
+<section class="section education-page">
   <div class="container">
 
-    <div class="eyebrow">CRYPTO4LIGHT KNOWLEDGE BASE</div>
+    <div class="education-heading">
+      <div class="eyebrow">CRYPTO4LIGHT LEARNING</div>
 
-    <h1>
-      Learn. Understand.<br>
-      Trade with <span>Knowledge.</span>
-    </h1>
+      <h1>Educational Guides & Tutorials.</h1>
 
-    <p>
-      Explore educational materials, practical tutorials and
-      cryptocurrency guides designed to help you understand
-      blockchain technology, trading and market behavior.
-    </p>
-
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-
-    <div class="section-label">Crypto4light Learning</div>
-    <h2>Educational Guides & Tutorials.</h2>
-
-    <p class="lead">
-      Practical knowledge, independent research and educational
-      content for cryptocurrency traders and investors.
-    </p>
+      <p class="lead">
+        Practical knowledge, independent research and educational content for cryptocurrency traders and investors.
+      </p>
+    </div>
 
     <div class="education-toolbar">
 
@@ -136,12 +119,39 @@ permalink: /education/
 
 <style>
 
+.education-page {
+  padding-top: 15px;
+}
+
+.education-heading {
+  text-align: center;
+  margin: 0 auto 16px;
+}
+
+.education-heading .eyebrow {
+  margin-bottom: 3px;
+}
+
+.education-heading h1 {
+  font-size: clamp(24px, 2.5vw, 30px);
+  line-height: 1.2;
+  margin: 0 0 5px;
+}
+
+.education-heading .lead {
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
 .education-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin: 32px 0 20px;
+  margin: 16px 0 20px;
   flex-wrap: wrap;
 }
 
@@ -319,6 +329,12 @@ permalink: /education/
   .education-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 18px !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .education-heading .lead {
+    white-space: normal;
   }
 }
 
