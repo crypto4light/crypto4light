@@ -1,0 +1,181 @@
+---
+---
+<article class="education-article">
+  <div class="container education-article-container">
+
+    <a href="/education/" class="education-back">
+      ← Back to Education
+    </a>
+
+    <header class="education-article-header">
+      <span class="eyebrow">CRYPTO4LIGHT EDUCATION</span>
+
+      <h1>{{ page.title }}</h1>
+
+      {% if page.date %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">
+          {{ page.date | date: "%B %d, %Y" }}
+        </time>
+      {% endif %}
+    </header>
+
+    {% if page.image %}
+      <div class="education-article-image">
+        <img
+          src="{{ page.image | relative_url }}"
+          alt="{{ page.title | escape }}"
+          loading="eager"
+        >
+      </div>
+    {% endif %}
+
+    {% if page.excerpt_text %}
+      <p class="education-article-intro">
+        {{ page.excerpt_text }}
+      </p>
+    {% endif %}
+
+    <div class="education-article-content">
+      {{ content }}
+    </div>
+
+    <footer class="education-article-footer">
+      <a href="/education/">← Back to Education</a>
+    </footer>
+
+  </div>
+</article>
+
+<style>
+.education-article {
+  padding: 55px 20px 90px;
+}
+
+.education-article-container {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.education-back,
+.education-article-footer a {
+  color: #a3a3a3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.education-back:hover,
+.education-article-footer a:hover {
+  color: #ffffff;
+}
+
+.education-article-header {
+  margin: 38px 0 28px;
+}
+
+.education-article-header .eyebrow {
+  color: #8b8b8b;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.education-article-header h1 {
+  color: #ffffff;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.2;
+  margin: 16px 0;
+}
+
+.education-article-header time {
+  color: #888;
+  font-size: 14px;
+}
+
+.education-article-image {
+  width: 100%;
+  margin: 30px 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.education-article-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.education-article-intro {
+  color: #bdbdbd;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 30px 0;
+}
+
+.education-article-content {
+  color: #c8c8c8;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.education-article-content h2 {
+  color: #ffffff;
+  font-size: 26px;
+  line-height: 1.3;
+  margin: 42px 0 18px;
+}
+
+.education-article-content h3 {
+  color: #ffffff;
+  font-size: 20px;
+  margin: 30px 0 14px;
+}
+
+.education-article-content p {
+  margin: 0 0 22px;
+}
+
+.education-article-content ul,
+.education-article-content ol {
+  padding-left: 25px;
+  margin-bottom: 24px;
+}
+
+.education-article-content li {
+  margin-bottom: 10px;
+}
+
+.education-article-content strong {
+  color: #ffffff;
+}
+
+.education-article-content a {
+  color: #8ab4ff;
+}
+
+.education-article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.education-article-footer {
+  border-top: 1px solid #292929;
+  margin-top: 55px;
+  padding-top: 25px;
+}
+
+@media (max-width: 600px) {
+  .education-article {
+    padding: 35px 18px 65px;
+  }
+
+  .education-article-header h1 {
+    font-size: 30px;
+  }
+
+  .education-article-content {
+    font-size: 15px;
+  }
+}
+</style>
