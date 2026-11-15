@@ -11,9 +11,6 @@ keywords:
   - Market Activity Indicator
   - Crypto Trading Indicators
 ---
-
-# Money Power
-
 The Crypto4light Money Power indicator is a proprietary TradingView tool designed to support cryptocurrency market analysis.
 
 This tutorial will explain its features, settings and practical applications.
