@@ -46,7 +46,12 @@ permalink: /indicators/
             TRADINGVIEW INDICATOR
           </div>
 
-          <h2>{{ indicator.title | escape }}</h2>
+          <h2 class="indicator-card-title">
+            {{ indicator.title | escape }}
+            {% if indicator.access == "free" %}
+              <span class="indicator-free-badge">FREE</span>
+            {% endif %}
+          </h2>
 
           <p>
             {{ indicator.description | default: "Explore the features and practical applications of this Crypto4light indicator." | escape }}
@@ -145,10 +150,26 @@ permalink: /indicators/
   margin-bottom: 10px;
 }
 
-.indicator-card h2 {
+.indicator-card-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
   color: #F0F3F6;
   font-size: 19px;
   margin: 0 0 10px;
+}
+
+.indicator-free-badge {
+  display: inline-block;
+  padding: 3px 7px;
+  border: 1px solid #FFD43B;
+  border-radius: 4px;
+  color: #FFD43B;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.4;
 }
 
 .indicator-card p {
