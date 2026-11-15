@@ -68,6 +68,27 @@ permalink: /indicators/
 </section>
 
 <style>
+
+/* INDICATORS PAGE HEADER */
+
+.section:has(.indicator-grid) {
+  padding-top: 15px;
+}
+
+.section:has(.indicator-grid) > .container > h1 {
+  margin-bottom: 3px;
+}
+
+.section:has(.indicator-grid) > .container > .lead {
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* INDICATOR GALLERY */
+
 .indicator-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
