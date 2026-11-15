@@ -11,7 +11,7 @@ layout: default
   "name": {{ page.title | strip_html | jsonify }},
   "description": {{ video_description | strip_html | normalize_whitespace | jsonify }},
   "thumbnailUrl": [
-    "https://i.ytimg.com/vi/{{ page.youtube_id | escape }}/maxresdefault.jpg"
+    "https://i.ytimg.com/vi/{{ page.youtube_id | escape }}/hqdefault.jpg"
   ],
   "uploadDate": {{ page.date | date_to_xmlschema | jsonify }},
   "embedUrl": "https://www.youtube-nocookie.com/embed/{{ page.youtube_id | escape }}",
@@ -19,9 +19,19 @@ layout: default
     "@type": "WebPage",
     "@id": {{ page.url | absolute_url | jsonify }}
   },
+  "author": {
+    "@type": "Organization",
+    "name": "Crypto4light",
+    "url": "https://crypto4light.com/"
+  },
   "publisher": {
     "@type": "Organization",
-    "name": "Crypto4light"
+    "name": "Crypto4light",
+    "url": "https://crypto4light.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://crypto4light.com/assets/images/crypto4light-logo.png"
+    }
   }
 }
 </script>
