@@ -1,0 +1,401 @@
+---
+layout: default
+title: Crypto Education & Tutorials
+description: Explore cryptocurrency educational guides, trading tutorials, technical analysis, blockchain analytics and practical crypto market knowledge by Crypto4light.
+permalink: /education/
+---
+
+<section class="hero">
+  <div class="container">
+
+    <div class="eyebrow">CRYPTO4LIGHT KNOWLEDGE BASE</div>
+
+    <h1>
+      Learn. Understand.<br>
+      Trade with <span>Knowledge.</span>
+    </h1>
+
+    <p>
+      Explore educational materials, practical tutorials and
+      cryptocurrency guides designed to help you understand
+      blockchain technology, trading and market behavior.
+    </p>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-label">Crypto4light Learning</div>
+    <h2>Educational Guides & Tutorials.</h2>
+
+    <p class="lead">
+      Practical knowledge, independent research and educational
+      content for cryptocurrency traders and investors.
+    </p>
+
+    <div class="education-toolbar">
+
+      <div class="education-search">
+        <span class="education-search-icon">⌕</span>
+        <input
+          type="search"
+          id="educationSearch"
+          placeholder="Search tutorials, topics or keywords..."
+          aria-label="Search educational materials"
+        >
+      </div>
+
+      <div class="education-sort">
+        <label for="educationSort">Sort by</label>
+        <select id="educationSort">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="education-results">
+      <span id="educationCount">Loading tutorials...</span>
+    </div>
+
+    <div class="grid education-gallery" id="educationGallery">
+
+      {% assign sorted_education = site.education | sort: "date" | reverse %}
+
+      {% for article in sorted_education %}
+
+        {% assign article_description = article.excerpt_text | default: article.description | default: "Explore this educational guide from Crypto4light." %}
+
+        <a
+          class="card education-card"
+          href="{{ article.url | relative_url }}"
+          data-title="{{ article.title | escape }}"
+          data-description="{{ article_description | strip_html | escape }}"
+          data-keywords="{{ article.keywords | join: ' ' | escape }}"
+          data-date="{{ article.date | date: '%Y-%m-%d' }}"
+          data-image="{{ article.image | default: '' | relative_url }}"
+          data-youtube="{{ article.youtube_id | default: '' | escape }}"
+        >
+
+          <div class="education-thumbnail">
+
+            {% if article.youtube_id %}
+              <img
+                src="https://i.ytimg.com/vi/{{ article.youtube_id }}/maxresdefault.jpg"
+                alt="{{ article.title | escape }}"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ article.youtube_id }}/hqdefault.jpg';"
+              >
+            {% elsif article.image %}
+              <img
+                src="{{ article.image | relative_url }}"
+                alt="{{ article.title | escape }}"
+                loading="lazy"
+              >
+            {% else %}
+              <div class="education-placeholder">
+                <span>CRYPTO4LIGHT</span>
+                <strong>EDUCATION</strong>
+              </div>
+            {% endif %}
+
+            {% if article.youtube_id %}
+              <span class="education-video-label">VIDEO</span>
+            {% endif %}
+
+          </div>
+
+          <div class="education-card-content">
+
+            <div class="education-date">
+              {{ article.date | date: "%B %d, %Y" }}
+            </div>
+
+            <h3>{{ article.title }}</h3>
+
+            <p>{{ article_description }}</p>
+
+            <span class="card-link">Read Tutorial →</span>
+
+          </div>
+
+        </a>
+
+      {% endfor %}
+
+    </div>
+
+    <div class="education-no-results" id="educationNoResults" hidden>
+      <h3>No tutorials found.</h3>
+      <p>Try another search term or keyword.</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+
+.education-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 32px 0 20px;
+  flex-wrap: wrap;
+}
+
+.education-search {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+}
+
+.education-search input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 18px 15px 45px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.035);
+  color: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.education-search input:focus {
+  border-color: rgba(255,255,255,0.4);
+}
+
+.education-search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 23px;
+  opacity: 0.6;
+}
+
+.education-sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary, #999);
+}
+
+.education-sort select {
+  padding: 13px 15px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: #151515;
+  color: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.education-results {
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--text-secondary, #999);
+}
+
+.education-gallery {
+  align-items: stretch;
+}
+
+.education-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.education-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #111;
+}
+
+.education-thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.education-card:hover .education-thumbnail img {
+  transform: scale(1.04);
+}
+
+.education-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #111, #202020);
+  color: #888;
+  letter-spacing: 3px;
+  font-size: 11px;
+}
+
+.education-placeholder strong {
+  font-size: 19px;
+  color: #fff;
+}
+
+.education-video-label {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.education-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 18px;
+}
+
+.education-date {
+  margin-bottom: 10px;
+  color: var(--text-secondary, #999);
+  font-size: 11px;
+}
+
+.education-card h3 {
+  margin-bottom: 10px;
+}
+
+.education-card p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-secondary, #aaa);
+}
+
+.education-card .card-link {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.education-no-results {
+  padding: 50px 20px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+
+.education-no-results p {
+  color: var(--text-secondary, #999);
+}
+
+@media (max-width: 600px) {
+
+  .education-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .education-search {
+    width: 100%;
+  }
+
+  .education-sort {
+    justify-content: space-between;
+  }
+
+  .education-sort select {
+    flex: 1;
+    max-width: 190px;
+  }
+
+}
+
+</style>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+
+  const gallery = document.getElementById("educationGallery");
+  const search = document.getElementById("educationSearch");
+  const sort = document.getElementById("educationSort");
+  const count = document.getElementById("educationCount");
+  const noResults = document.getElementById("educationNoResults");
+
+  if (!gallery || !search || !sort) return;
+
+  const cards = Array.from(
+    gallery.querySelectorAll(".education-card")
+  );
+
+  function updateGallery() {
+
+    const query = search.value.trim().toLowerCase();
+    const sortOrder = sort.value;
+
+    const filteredCards = cards.filter(function(card) {
+
+      const searchableText = [
+        card.dataset.title,
+        card.dataset.description,
+        card.dataset.keywords
+      ].join(" ").toLowerCase();
+
+      return searchableText.includes(query);
+
+    });
+
+    filteredCards.sort(function(a, b) {
+
+      const dateA = a.dataset.date || "";
+      const dateB = b.dataset.date || "";
+
+      if (sortOrder === "oldest") {
+        return dateA.localeCompare(dateB);
+      }
+
+      return dateB.localeCompare(dateA);
+
+    });
+
+    cards.forEach(function(card) {
+      card.style.display = "none";
+    });
+
+    filteredCards.forEach(function(card) {
+      card.style.display = "";
+      gallery.appendChild(card);
+    });
+
+    count.textContent =
+      "Showing " + filteredCards.length +
+      " of " + cards.length + " tutorials";
+
+    noResults.hidden = filteredCards.length !== 0;
+
+  }
+
+  search.addEventListener("input", updateGallery);
+  sort.addEventListener("change", updateGallery);
+
+  updateGallery();
+
+});
+
+</script>
