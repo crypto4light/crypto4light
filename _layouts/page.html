@@ -21,7 +21,18 @@ layout: default
       {% endif %}
     </header>
 
-    {% if page.image %}
+    {% if page.youtube_id %}
+      <div class="education-article-video">
+        <iframe
+          src="https://www.youtube.com/embed/{{ page.youtube_id }}"
+          title="{{ page.title | escape }}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    {% elsif page.image %}
       <div class="education-article-image">
         <img
           src="{{ page.image | relative_url }}"
@@ -97,7 +108,8 @@ layout: default
   font-size: 14px;
 }
 
-.education-article-image {
+.education-article-image,
+.education-article-video {
   width: 100%;
   margin: 25px 0 30px;
   overflow: hidden;
@@ -110,6 +122,19 @@ layout: default
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.education-article-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.education-article-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .education-article-intro {
