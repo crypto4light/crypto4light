@@ -61,7 +61,7 @@ permalink: /education/
       <span id="educationCount">Loading tutorials...</span>
     </div>
 
-    <div class="grid education-gallery" id="educationGallery">
+    <div class="education-gallery" id="educationGallery">
 
       {% assign sorted_education = site.education | sort: "date" | reverse %}
 
@@ -76,8 +76,6 @@ permalink: /education/
           data-description="{{ article_description | strip_html | escape }}"
           data-keywords="{{ article.keywords | join: ' ' | escape }}"
           data-date="{{ article.date | date: '%Y-%m-%d' }}"
-          data-image="{{ article.image | default: '' | relative_url }}"
-          data-youtube="{{ article.youtube_id | default: '' | escape }}"
         >
 
           <div class="education-thumbnail">
@@ -196,6 +194,8 @@ permalink: /education/
   cursor: pointer;
 }
 
+/* EDUCATION GALLERY */
+
 .education-results {
   margin-bottom: 20px;
   font-size: 12px;
@@ -203,13 +203,18 @@ permalink: /education/
 }
 
 .education-gallery {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 22px !important;
   align-items: stretch;
+  width: 100%;
 }
 
 .education-card {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   height: 100%;
+  min-width: 0;
   overflow: hidden;
   text-decoration: none;
 }
@@ -220,6 +225,7 @@ permalink: /education/
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #111;
+  flex-shrink: 0;
 }
 
 .education-thumbnail img {
@@ -255,8 +261,8 @@ permalink: /education/
 
 .education-video-label {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
+  bottom: 10px;
+  right: 10px;
   padding: 5px 9px;
   border-radius: 4px;
   background: rgba(0,0,0,0.8);
@@ -269,28 +275,31 @@ permalink: /education/
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 18px;
+  padding: 15px;
 }
 
 .education-date {
-  margin-bottom: 10px;
+  margin-bottom: 9px;
   color: var(--text-secondary, #999);
   font-size: 11px;
 }
 
 .education-card h3 {
-  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.45;
+  margin: 0 0 9px;
 }
 
 .education-card p {
-  font-size: 13px;
-  line-height: 1.65;
+  font-size: 12px;
+  line-height: 1.6;
   color: var(--text-secondary, #aaa);
 }
 
 .education-card .card-link {
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 14px;
+  font-size: 13px;
 }
 
 .education-no-results {
@@ -303,6 +312,17 @@ permalink: /education/
 .education-no-results p {
   color: var(--text-secondary, #999);
 }
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .education-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+}
+
+/* MOBILE */
 
 @media (max-width: 600px) {
 
@@ -322,6 +342,11 @@ permalink: /education/
   .education-sort select {
     flex: 1;
     max-width: 190px;
+  }
+
+  .education-gallery {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
   }
 
 }
