@@ -75,14 +75,17 @@ permalink: /market-analysis/
 }
 
 .market-heading {
-  max-width: 850px;
-  margin: 0 auto 20px;
+  max-width: 100%;
+  margin: 0 auto 16px;
   text-align: center;
 }
 
 .market-heading .lead {
-  max-width: 720px;
-  margin: 8px auto 0;
+  max-width: 100%;
+  margin: 6px auto 0;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
 .analysis-controls {
@@ -226,6 +229,12 @@ permalink: /market-analysis/
 
   .analysis-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 850px) {
+  .market-heading .lead {
+    white-space: normal;
   }
 }
 
