@@ -5,6 +5,7 @@ description: "Explore the Crypto4light Ema Multi proprietary TradingView indicat
 permalink: /indicators/ema-multi/
 order: 11
 access: free
+tradingview_url: "https://www.tradingview.com/script/wF7C5fUS-Crypto4light-EMA-Multi/"
 keywords:
   - Ema Multi Indicator
   - Multiple EMA Indicator
