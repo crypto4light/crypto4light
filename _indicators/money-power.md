@@ -2,7 +2,7 @@
 title: "Money Power"
 description: "Explore the Crypto4light Money Power TradingView indicator. Learn how to analyze market activity, money flow dynamics and potential trading opportunities."
 permalink: /indicators/money-power/
-layout: page
+layout: indicator
 order: 3
 keywords:
   - Money Power Indicator
