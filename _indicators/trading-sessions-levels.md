@@ -11,9 +11,6 @@ keywords:
   - Crypto Trading Tools
   - Market Sessions Analysis
 ---
-
-# Trading Sessions & Levels
-
 The Crypto4light Trading Sessions & Levels indicator is a proprietary TradingView tool designed to help traders analyze trading sessions and important price levels.
 
 This tutorial will explain the indicator's features, settings and practical applications.
