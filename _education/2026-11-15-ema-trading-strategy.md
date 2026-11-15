@@ -1,7 +1,7 @@
 ---
 title: "EMA Trading Strategy Explained | How to Use Exponential Moving Averages"
 date: 2026-11-15
-image: /assets/images/ema-trading-strategy.jpg
+image: /assets/images/ema-trading-strategy.jpeg
 description: "Learn how to use the Exponential Moving Average (EMA) in trading. Explore EMA crossover strategies, dynamic support and resistance, trend confirmation and practical trading techniques."
 excerpt_text: "A practical guide to the Exponential Moving Average (EMA), covering trend identification, EMA crossovers, dynamic support and resistance, RSI confirmation and intraday trading strategies."
 keywords:
