@@ -28,33 +28,14 @@ permalink: /market-analysis/
         >
       </div>
 
-      <div class="analysis-filters">
-
-        <div class="filter-group">
-          <label for="dateFrom">From date</label>
-          <input type="date" id="dateFrom">
-        </div>
-
-        <div class="filter-group">
-          <label for="dateTo">To date</label>
-          <input type="date" id="dateTo">
-        </div>
-
-        <div class="filter-group">
-          <label for="analysisSort">Sort by</label>
-          <select id="analysisSort">
-            <option value="newest">Newest first</option>
-            <option value="oldest">Oldest first</option>
-          </select>
-        </div>
-
+      <div class="analysis-sort">
+        <label for="analysisSort">Sort by</label>
+        <select id="analysisSort">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+        </select>
       </div>
-    </div>
 
-    <div class="analysis-results">
-      <button type="button" id="clearFilters" class="clear-filters">
-        Clear filters
-      </button>
     </div>
 
     <div class="analysis-grid" id="analysisGrid">
@@ -63,7 +44,7 @@ permalink: /market-analysis/
 
     <div class="analysis-empty" id="analysisEmpty" hidden>
       <h2>No analyses found</h2>
-      <p>Try changing your search or date filters.</p>
+      <p>Try another ticker or keyword.</p>
     </div>
 
   </div>
@@ -90,19 +71,18 @@ permalink: /market-analysis/
 
 .analysis-controls {
   display: grid;
-  grid-template-columns: minmax(100px, 0.65fr) repeat(3, minmax(120px, 1fr));
+  grid-template-columns: minmax(0, 1fr) 190px;
   align-items: end;
   gap: 10px;
   background: #111720;
   border: 1px solid #242D39;
   border-radius: 10px;
   padding: 10px 12px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .analysis-search input,
-.filter-group input,
-.filter-group select {
+.analysis-sort select {
   width: 100%;
   min-height: 34px;
   padding: 6px 10px;
@@ -115,42 +95,20 @@ permalink: /market-analysis/
 }
 
 .analysis-search input:focus,
-.filter-group input:focus,
-.filter-group select:focus {
+.analysis-sort select:focus {
   outline: none;
   border-color: #FFD43B;
 }
 
-.analysis-filters {
-  display: contents;
-}
-
-.filter-group {
+.analysis-sort {
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
-.filter-group label {
+.analysis-sort label {
   color: #929EAC;
   font-size: 12px;
-}
-
-.analysis-results {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 8px 0 14px;
-  color: #929EAC;
-  font-size: 13px;
-}
-
-.clear-filters {
-  background: none;
-  border: none;
-  color: #FFD43B;
-  cursor: pointer;
-  font: inherit;
 }
 
 .analysis-grid {
@@ -223,10 +181,6 @@ permalink: /market-analysis/
 }
 
 @media (max-width: 950px) {
-  .analysis-controls {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .analysis-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -246,12 +200,6 @@ permalink: /market-analysis/
   .analysis-controls {
     grid-template-columns: 1fr;
     padding: 10px;
-    gap: 10px;
-  }
-
-  .analysis-filters {
-    display: grid;
-    grid-template-columns: 1fr;
     gap: 10px;
   }
 
@@ -280,13 +228,18 @@ permalink: /market-analysis/
 
   const grid = document.getElementById("analysisGrid");
   const search = document.getElementById("analysisSearch");
-  const dateFrom = document.getElementById("dateFrom");
-  const dateTo = document.getElementById("dateTo");
   const sort = document.getElementById("analysisSort");
   const empty = document.getElementById("analysisEmpty");
-  const clear = document.getElementById("clearFilters");
 
-  if (!grid) return;
+  if (!grid || !search || !sort || !empty) return;
+
+  function toSearchText(value) {
+    if (Array.isArray(value)) {
+      return value.join(" ");
+    }
+
+    return value || "";
+  }
 
   function render() {
     const query = search.value.trim().toLowerCase();
@@ -295,15 +248,11 @@ permalink: /market-analysis/
       const searchable = [
         video.title,
         video.description,
-        ...(video.keywords || []),
-        ...(video.assets || [])
+        toSearchText(video.keywords),
+        toSearchText(video.assets)
       ].join(" ").toLowerCase();
 
-      const matchesSearch = searchable.includes(query);
-      const matchesFrom = !dateFrom.value || video.date >= dateFrom.value;
-      const matchesTo = !dateTo.value || video.date <= dateTo.value;
-
-      return matchesSearch && matchesFrom && matchesTo;
+      return searchable.includes(query);
     });
 
     filtered.sort((a, b) => {
@@ -314,6 +263,7 @@ permalink: /market-analysis/
 
     grid.innerHTML = filtered.map(video => {
       const videoId = video.youtubeId;
+
       const thumbnail = videoId
         ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
         : "";
@@ -344,17 +294,7 @@ permalink: /market-analysis/
   }
 
   search.addEventListener("input", render);
-  dateFrom.addEventListener("change", render);
-  dateTo.addEventListener("change", render);
   sort.addEventListener("change", render);
-
-  clear.addEventListener("click", () => {
-    search.value = "";
-    dateFrom.value = "";
-    dateTo.value = "";
-    sort.value = "newest";
-    render();
-  });
 
   render();
 })();
