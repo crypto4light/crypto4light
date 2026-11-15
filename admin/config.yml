@@ -20,7 +20,13 @@ collections:
       - { label: "YouTube ID", name: "youtube_id", widget: "string", required: false }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Excerpt", name: "excerpt_text", widget: "text" }
-      - { label: "Keywords", name: "keywords", widget: "list" }
+      - label: "Keywords"
+        name: "keywords"
+        widget: "list"
+        field:
+          label: "Keyword"
+          name: "keyword"
+          widget: "string"
       - { label: "Article Content", name: "body", widget: "markdown" }
 
   - name: "market_analysis"
@@ -38,7 +44,13 @@ collections:
       - label: "Assets"
         name: "assets"
         widget: "list"
-      - { label: "Keywords", name: "keywords", widget: "list" }
+      - label: "Keywords"
+        name: "keywords"
+        widget: "list"
+        field:
+          label: "Keyword"
+          name: "keyword"
+          widget: "string"
       - { label: "Article Content", name: "body", widget: "markdown" }
 
   - name: "indicators"
@@ -53,7 +65,13 @@ collections:
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Permalink", name: "permalink", widget: "string", required: false }
       - { label: "Access", name: "access", widget: "select", options: ["FREE", "PREMIUM"], required: false }
-      - { label: "Keywords", name: "keywords", widget: "list" }
+      - label: "Keywords"
+        name: "keywords"
+        widget: "list"
+        field:
+          label: "Keyword"
+          name: "keyword"
+          widget: "string"
       - { label: "Preview Image", name: "image", widget: "image", required: false }
       - { label: "YouTube Video ID", name: "youtube_id", widget: "string", required: false }
       - { label: "TradingView URL", name: "tradingview_url", widget: "string", required: false }
