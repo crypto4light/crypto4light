@@ -52,7 +52,6 @@ permalink: /market-analysis/
     </div>
 
     <div class="analysis-results">
-      <span id="resultsCount">0 analyses</span>
       <button type="button" id="clearFilters" class="clear-filters">
         Clear filters
       </button>
@@ -88,7 +87,7 @@ permalink: /market-analysis/
 
 .analysis-controls {
   display: grid;
-  grid-template-columns: minmax(200px, 1.5fr) repeat(3, minmax(120px, 1fr));
+  grid-template-columns: minmax(150px, 1fr) repeat(3, minmax(120px, 1fr));
   align-items: end;
   gap: 10px;
   background: #111720;
@@ -136,9 +135,9 @@ permalink: /market-analysis/
 
 .analysis-results {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  margin: 10px 0 14px;
+  margin: 8px 0 14px;
   color: #929EAC;
   font-size: 13px;
 }
@@ -275,7 +274,6 @@ permalink: /market-analysis/
   const dateFrom = document.getElementById("dateFrom");
   const dateTo = document.getElementById("dateTo");
   const sort = document.getElementById("analysisSort");
-  const count = document.getElementById("resultsCount");
   const empty = document.getElementById("analysisEmpty");
   const clear = document.getElementById("clearFilters");
 
@@ -333,7 +331,6 @@ permalink: /market-analysis/
       `;
     }).join("");
 
-    count.textContent = `${filtered.length} ${filtered.length === 1 ? "analysis" : "analyses"}`;
     empty.hidden = filtered.length !== 0;
   }
 
