@@ -1,4 +1,3 @@
-
 title: Crypto4light
 description: Independent Crypto Market Analysis, TradingView Indicators, Research and Educational Resources.
 url: "https://crypto4light.com"
@@ -6,6 +5,17 @@ baseurl: ""
 
 lang: en
 timezone: Europe/Kyiv
+
+logo: /assets/images/crypto4light-logo.png
+
+author:
+  name: Crypto4light
+  url: https://crypto4light.com/
+
+social:
+  name: Crypto4light
+  links:
+    - https://crypto4light.com/
 
 markdown: kramdown
 permalink: /:categories/:title/
