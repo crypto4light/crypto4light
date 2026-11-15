@@ -4,6 +4,7 @@ title: "Ema Multi"
 description: "Explore the Crypto4light Ema Multi proprietary TradingView indicator. Learn about its features, chart applications and practical trading use cases."
 permalink: /indicators/ema-multi/
 order: 11
+access: free
 keywords:
   - Ema Multi Indicator
   - Multiple EMA Indicator
