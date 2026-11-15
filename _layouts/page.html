@@ -1,14 +1,16 @@
 ---
+layout: default
 ---
-<article class="education-article">
-  <div class="container education-article-container">
 
-    <a href="/education/" class="education-back">
+<article class="education-article">
+  <div class="education-article-container">
+
+    <a href="{{ '/education/' | relative_url }}" class="education-back">
       ← Back to Education
     </a>
 
     <header class="education-article-header">
-      <span class="eyebrow">CRYPTO4LIGHT EDUCATION</span>
+      <span class="education-eyebrow">CRYPTO4LIGHT EDUCATION</span>
 
       <h1>{{ page.title }}</h1>
 
@@ -24,7 +26,6 @@
         <img
           src="{{ page.image | relative_url }}"
           alt="{{ page.title | escape }}"
-          loading="eager"
         >
       </div>
     {% endif %}
@@ -40,7 +41,9 @@
     </div>
 
     <footer class="education-article-footer">
-      <a href="/education/">← Back to Education</a>
+      <a href="{{ '/education/' | relative_url }}">
+        ← Back to Education
+      </a>
     </footer>
 
   </div>
@@ -48,41 +51,45 @@
 
 <style>
 .education-article {
-  padding: 55px 20px 90px;
+  padding: 25px 20px 80px;
+  background: transparent;
+  min-height: 70vh;
 }
 
 .education-article-container {
-  max-width: 820px;
+  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
 }
 
-.education-back,
-.education-article-footer a {
-  color: #a3a3a3;
+.education-back {
+  display: inline-block;
+  color: #999;
   text-decoration: none;
   font-size: 14px;
+  margin-bottom: 25px;
 }
 
-.education-back:hover,
-.education-article-footer a:hover {
-  color: #ffffff;
+.education-back:hover {
+  color: #fff;
 }
 
 .education-article-header {
-  margin: 38px 0 28px;
+  margin: 0 0 25px;
 }
 
-.education-article-header .eyebrow {
-  color: #8b8b8b;
+.education-eyebrow {
+  color: #999;
   font-size: 12px;
   letter-spacing: 2px;
 }
 
 .education-article-header h1 {
-  color: #ffffff;
-  font-size: clamp(30px, 5vw, 44px);
+  display: block;
+  color: #fff;
+  font-size: clamp(30px, 5vw, 42px);
   line-height: 1.2;
-  margin: 16px 0;
+  margin: 14px 0;
 }
 
 .education-article-header time {
@@ -92,7 +99,7 @@
 
 .education-article-image {
   width: 100%;
-  margin: 30px 0;
+  margin: 25px 0 30px;
   overflow: hidden;
   border-radius: 12px;
 }
@@ -106,10 +113,10 @@
 }
 
 .education-article-intro {
-  color: #bdbdbd;
+  color: #bbb;
   font-size: 18px;
   line-height: 1.8;
-  margin: 30px 0;
+  margin: 25px 0;
 }
 
 .education-article-content {
@@ -119,16 +126,16 @@
 }
 
 .education-article-content h2 {
-  color: #ffffff;
+  color: #fff;
   font-size: 26px;
   line-height: 1.3;
-  margin: 42px 0 18px;
+  margin: 38px 0 16px;
 }
 
 .education-article-content h3 {
-  color: #ffffff;
+  color: #fff;
   font-size: 20px;
-  margin: 30px 0 14px;
+  margin: 28px 0 12px;
 }
 
 .education-article-content p {
@@ -146,7 +153,7 @@
 }
 
 .education-article-content strong {
-  color: #ffffff;
+  color: #fff;
 }
 
 .education-article-content a {
@@ -161,13 +168,22 @@
 
 .education-article-footer {
   border-top: 1px solid #292929;
-  margin-top: 55px;
-  padding-top: 25px;
+  margin-top: 45px;
+  padding-top: 22px;
+}
+
+.education-article-footer a {
+  color: #999;
+  text-decoration: none;
+}
+
+.education-article-footer a:hover {
+  color: #fff;
 }
 
 @media (max-width: 600px) {
   .education-article {
-    padding: 35px 18px 65px;
+    padding: 20px 18px 60px;
   }
 
   .education-article-header h1 {
