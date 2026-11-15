@@ -4,6 +4,8 @@ description: "Explore the Crypto4light SMC Zones TradingView indicator. Learn ho
 permalink: /indicators/smc-zones/
 layout: indicator
 order: 4
+access: free
+tradingview_url: "https://www.tradingview.com/script/mtvitujX-Crypto4light-SMC-Zones/"
 keywords:
   - SMC Zones
   - Smart Money Concepts Indicator
