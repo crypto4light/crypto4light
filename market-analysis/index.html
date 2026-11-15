@@ -5,11 +5,11 @@ description: Daily cryptocurrency market analysis, Bitcoin and altcoin technical
 permalink: /market-analysis/
 ---
 
-<section class="section">
+<section class="section market-analysis-section">
   <div class="container">
 
- <div class="market-heading">
-  <span class="eyebrow">MARKET ANALYSIS</span>
+    <div class="market-heading">
+      <span class="eyebrow">MARKET ANALYSIS</span>
       <p class="lead">
         Daily cryptocurrency market analysis, technical insights and
         trading perspectives covering Bitcoin, altcoins and the wider
@@ -71,35 +71,39 @@ permalink: /market-analysis/
 </section>
 
 <style>
+.market-analysis-section {
+  padding-top: 15px;
+}
+
 .market-heading {
   max-width: 850px;
-  margin: 0 auto 26px;
+  margin: 0 auto 20px;
   text-align: center;
 }
 
 .market-heading .lead {
   max-width: 720px;
-  margin: 12px auto 0;
+  margin: 8px auto 0;
 }
 
 .analysis-controls {
   display: grid;
-  grid-template-columns: minmax(220px, 1.5fr) repeat(3, minmax(130px, 1fr));
+  grid-template-columns: minmax(200px, 1.5fr) repeat(3, minmax(120px, 1fr));
   align-items: end;
-  gap: 14px;
+  gap: 10px;
   background: #111720;
   border: 1px solid #242D39;
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 14px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
 }
 
 .analysis-search input,
 .filter-group input,
 .filter-group select {
   width: 100%;
-  min-height: 40px;
-  padding: 9px 12px;
+  min-height: 34px;
+  padding: 6px 10px;
   background: #0B0E13;
   border: 1px solid #303B49;
   border-radius: 8px;
@@ -122,7 +126,7 @@ permalink: /market-analysis/
 .filter-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 }
 
 .filter-group label {
@@ -134,7 +138,7 @@ permalink: /market-analysis/
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 12px 0 16px;
+  margin: 10px 0 14px;
   color: #929EAC;
   font-size: 13px;
 }
@@ -233,18 +237,18 @@ permalink: /market-analysis/
 
   .analysis-controls {
     grid-template-columns: 1fr;
-    padding: 13px;
-    gap: 12px;
+    padding: 10px;
+    gap: 10px;
   }
 
   .analysis-filters {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
   .market-heading {
-    margin-bottom: 22px;
+    margin-bottom: 18px;
   }
 }
 </style>
