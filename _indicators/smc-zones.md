@@ -2,7 +2,7 @@
 title: "SMC Zones"
 description: "Explore the Crypto4light SMC Zones TradingView indicator. Learn how to identify and analyze smart money concepts zones and potential market reaction areas."
 permalink: /indicators/smc-zones/
-layout: page
+layout: indicator
 order: 4
 keywords:
   - SMC Zones
