@@ -1,6 +1,6 @@
 ---
 title: Crypto Market Reaction to Jensen Huang News
-date: 2026-11-14
+date: 2026-11-13
 youtube_id: tWJ_5R_5pw8
 description: Analyze how crypto markets react to Jensen Huang news, exploring
   potential impacts on Bitcoin, altcoins, AI tokens, market sentiment and
