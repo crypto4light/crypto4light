@@ -60,6 +60,22 @@ layout: default
   </div>
 </article>
 
+{% if page.youtube_id %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | default: page.excerpt_text | strip_html | jsonify }},
+  "thumbnailUrl": [
+    "https://img.youtube.com/vi/{{ page.youtube_id }}/hqdefault.jpg"
+  ],
+  "uploadDate": {{ page.date | date_to_xmlschema | jsonify }},
+  "embedUrl": {{ page.youtube_id | prepend: "https://www.youtube.com/embed/" | jsonify }}
+}
+</script>
+{% endif %}
+
 <style>
 .education-article {
   padding: 25px 20px 80px;
