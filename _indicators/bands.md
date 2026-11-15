@@ -11,8 +11,6 @@ keywords:
   - Trading Signals
 ---
 
-# Crypto4light Bands
-
 The Crypto4light Bands indicator is a proprietary TradingView tool designed to support cryptocurrency market analysis.
 
 This tutorial will explain the indicator's features, settings and practical applications, helping traders understand how to interpret its signals and use them in their market analysis.
