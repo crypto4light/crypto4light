@@ -22,16 +22,12 @@ layout: default
           class="indicator-access-button"
           target="_blank"
           rel="noopener noreferrer">
-          GET FREE ON TRADINGVIEW
-          <span>↗</span>
+          GET FREE ON TRADINGVIEW <span>↗</span>
         </a>
 
         <div class="indicator-favorites">
-          <strong>Save it to your Favorites</strong>
-          <p>
-            Open the indicator on TradingView and click the star icon
-            to add it to your Favorites for quick access to your charting tools.
-          </p>
+          <span class="favorites-star">☆</span>
+          <span>Add it to your TradingView Favorites for quick access.</span>
         </div>
 
       </div>
@@ -117,7 +113,7 @@ layout: default
 }
 
 .indicator-article-header {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .indicator-eyebrow {
@@ -136,57 +132,57 @@ layout: default
 /* FREE INDICATOR ACCESS */
 
 .indicator-access {
-  margin: 0 0 35px;
-  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 0 0 28px;
+  padding: 12px 15px;
   background: #15191F;
   border: 1px solid #303640;
-  border-radius: 12px;
-  text-align: center;
+  border-radius: 9px;
 }
 
 .indicator-access-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 15px 28px;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 10px 17px;
   background: #FFD43B;
   color: #111 !important;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   text-decoration: none !important;
-  border-radius: 7px;
-  transition: background 0.2s ease, transform 0.2s ease;
+  border-radius: 6px;
+  transition: background 0.2s ease;
 }
 
 .indicator-access-button:hover {
   background: #FFE477;
   color: #111 !important;
-  transform: translateY(-2px);
 }
 
 .indicator-access-button span {
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .indicator-favorites {
-  max-width: 600px;
-  margin: 20px auto 0;
-}
-
-.indicator-favorites strong {
-  display: block;
-  color: #F0F3F6;
-  font-size: 15px;
-  margin-bottom: 8px;
-}
-
-.indicator-favorites p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   color: #AAB3BF;
-  font-size: 13px;
-  line-height: 1.7;
-  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.favorites-star {
+  color: #FFD43B;
+  font-size: 19px;
+  line-height: 1;
 }
 
 /* IMAGE AND VIDEO */
@@ -307,13 +303,15 @@ layout: default
   }
 
   .indicator-access {
-    padding: 20px 15px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
   }
 
   .indicator-access-button {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 15px 12px;
+    width: auto;
+    padding: 10px 15px;
   }
 }
 </style>
