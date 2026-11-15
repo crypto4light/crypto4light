@@ -8,60 +8,171 @@ permalink: /indicators/
 <section class="section">
   <div class="container">
 
-    <div class="eyebrow">Trading Tools & Market Analytics</div>
+    <div class="eyebrow">CRYPTO4LIGHT TRADING TOOLS</div>
 
     <h1>TradingView Indicators</h1>
 
     <p class="lead">
-      Discover proprietary analytical tools designed to identify
-      market structure, fundamental value, price levels,
-      divergences and potential trading opportunities.
+      Explore proprietary TradingView indicators developed by Crypto4light.
+      Discover analytical tools, market signals and practical trading tutorials.
     </p>
 
-    <div class="grid">
+    <div class="indicator-grid">
 
-      <div class="card">
-        <div class="section-label">01 / Fundamental Analysis</div>
-        <h3>Fundamental Value Line</h3>
-        <p>
-          Explore how the indicator estimates fundamental value
-          and helps identify potential undervaluation and
-          overvaluation zones.
-        </p>
-        <span class="card-link">Tutorial coming soon</span>
-      </div>
+      {% assign indicators = site.indicators | sort: "order" %}
 
-      <div class="card">
-        <div class="section-label">02 / Price Analysis</div>
-        <h3>Fair Price Line</h3>
-        <p>
-          Learn how to use fair price levels to analyze
-          price deviations and potential market opportunities.
-        </p>
-        <span class="card-link">Tutorial coming soon</span>
-      </div>
+      {% for indicator in indicators %}
+      <a class="indicator-card" href="{{ indicator.url | relative_url }}">
 
-      <div class="card">
-        <div class="section-label">03 / Market Structure</div>
-        <h3>Inner Support & Resistance</h3>
-        <p>
-          Understand dynamic support and resistance levels
-          and how they can help analyze market structure.
-        </p>
-        <span class="card-link">Tutorial coming soon</span>
-      </div>
+        <div class="indicator-preview">
+          {% if indicator.image %}
+            <img
+              src="{{ indicator.image | relative_url }}"
+              alt="{{ indicator.title | escape }} TradingView indicator preview"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="preview-placeholder">
+              <span>CRYPTO4LIGHT</span>
+              <strong>{{ indicator.title | escape }}</strong>
+              <small>INDICATOR PREVIEW</small>
+            </div>
+          {% endif %}
+        </div>
 
-      <div class="card">
-        <div class="section-label">04 / Momentum Analysis</div>
-        <h3>MACD & RSI Divergences</h3>
-        <p>
-          Explore momentum divergences and learn how to
-          identify potential changes in market direction.
-        </p>
-        <span class="card-link">Tutorial coming soon</span>
-      </div>
+        <div class="indicator-card-content">
+
+          <div class="indicator-card-label">
+            TRADINGVIEW INDICATOR
+          </div>
+
+          <h2>{{ indicator.title | escape }}</h2>
+
+          <p>
+            {{ indicator.description | default: "Explore the features and practical applications of this Crypto4light indicator." | escape }}
+          </p>
+
+          <span class="indicator-card-link">Explore Tutorial →</span>
+
+        </div>
+      </a>
+      {% endfor %}
 
     </div>
 
   </div>
 </section>
+
+<style>
+.indicator-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.indicator-card {
+  display: block;
+  text-decoration: none;
+  background: #111720;
+  border: 1px solid #242D39;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color .2s, transform .2s;
+}
+
+.indicator-card:hover {
+  border-color: #FFD43B;
+  transform: translateY(-4px);
+}
+
+.indicator-preview {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0B1017;
+  overflow: hidden;
+}
+
+.indicator-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background:
+    linear-gradient(rgba(255,212,59,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,212,59,.04) 1px, transparent 1px),
+    #0B1017;
+  background-size: 28px 28px;
+  text-align: center;
+  padding: 15px;
+}
+
+.preview-placeholder span {
+  color: #FFD43B;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+.preview-placeholder strong {
+  color: #F0F3F6;
+  font-size: 20px;
+}
+
+.preview-placeholder small {
+  color: #929EAC;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.indicator-card-content {
+  padding: 20px;
+}
+
+.indicator-card-label {
+  color: #FFD43B;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.indicator-card h2 {
+  color: #F0F3F6;
+  font-size: 19px;
+  margin: 0 0 10px;
+}
+
+.indicator-card p {
+  color: #929EAC;
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 0 0 18px;
+}
+
+.indicator-card-link {
+  color: #FFD43B;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .indicator-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .indicator-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
