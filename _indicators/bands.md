@@ -1,5 +1,5 @@
 ---
-title: "Bands – Crypto4light TradingView Indicator"
+title: "Bands"
 description: "Learn how to use the Crypto4light Bands TradingView indicator. Explore its features, chart signals, settings and practical trading applications."
 permalink: /indicators/bands/
 layout: page
