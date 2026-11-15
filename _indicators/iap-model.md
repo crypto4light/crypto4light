@@ -4,6 +4,8 @@ title: "iAP Model"
 description: "Explore the Crypto4light iAP Model proprietary TradingView indicator. Learn about its features, chart applications and practical trading use cases."
 permalink: /indicators/iap-model/
 order: 10
+access: free
+tradingview_url: "https://www.tradingview.com/script/GhvgDyhf-Crypto4light-iAP-model/"
 keywords:
   - iAP Model
   - iAP Trading Model
