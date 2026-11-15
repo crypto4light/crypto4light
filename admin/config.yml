@@ -1,6 +1,6 @@
 backend:
-  name: github
-  repo: crypto4light/crypto4light
+  name: turbo-github
+  turbo_site_id: 42715493-8eca-4f1a-9a0e-5b246b53ca52
   branch: main
 
 media_folder: "assets/images/uploads"
