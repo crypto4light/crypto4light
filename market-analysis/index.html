@@ -20,6 +20,7 @@ permalink: /market-analysis/
     <div class="analysis-controls">
 
       <div class="analysis-search">
+        <span class="analysis-search-icon">⌕</span>
         <input
           type="search"
           id="analysisSearch"
@@ -81,7 +82,37 @@ permalink: /market-analysis/
   margin-bottom: 20px;
 }
 
-.analysis-search input,
+.analysis-search {
+  position: relative;
+}
+
+.analysis-search input {
+  width: 100%;
+  min-height: 34px;
+  box-sizing: border-box;
+  padding: 6px 10px 6px 38px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.035);
+  color: #F0F3F6;
+  font: inherit;
+  outline: none;
+}
+
+.analysis-search input:focus {
+  border-color: rgba(255,255,255,0.4);
+}
+
+.analysis-search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 23px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .analysis-sort select {
   width: 100%;
   min-height: 34px;
@@ -94,7 +125,6 @@ permalink: /market-analysis/
   box-sizing: border-box;
 }
 
-.analysis-search input:focus,
 .analysis-sort select:focus {
   outline: none;
   border-color: #FFD43B;
