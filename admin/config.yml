@@ -40,3 +40,23 @@ collections:
         widget: "list"
       - { label: "Keywords", name: "keywords", widget: "list" }
       - { label: "Article Content", name: "body", widget: "markdown" }
+
+  - name: "indicators"
+    label: "Indicators"
+    folder: "_indicators"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Permalink", name: "permalink", widget: "string", required: false }
+      - { label: "Access", name: "access", widget: "select", options: ["FREE", "PREMIUM"], required: false }
+      - { label: "Keywords", name: "keywords", widget: "list" }
+      - { label: "Preview Image", name: "image", widget: "image", required: false }
+      - { label: "YouTube Video ID", name: "youtube_id", widget: "string", required: false }
+      - { label: "TradingView URL", name: "tradingview_url", widget: "string", required: false }
+      - { label: "Intro", name: "intro", widget: "text", required: false }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "indicator" }
+      - { label: "Indicator Content", name: "body", widget: "markdown" }
