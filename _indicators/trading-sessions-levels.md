@@ -1,5 +1,5 @@
 ---
-title: "Trading Sessions & Levels – Crypto4light TradingView Indicator"
+title: "Trading Sessions & Levels"
 description: "Discover the Crypto4light Trading Sessions & Levels indicator for TradingView. Learn how to analyze trading sessions, key price levels and market activity."
 permalink: /indicators/trading-sessions-levels/
 layout: page
