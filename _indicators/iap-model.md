@@ -17,7 +17,7 @@ layout: indicator
 order: 10
 tradingview_url: https://www.tradingview.com/script/GhvgDyhf-Crypto4light-iAP-model/
 ---
-# Custom Automatic Fibonacci Grid for Post-Listing Tokens
+## Custom Automatic Fibonacci Grid for Post-Listing Tokens
 
 A specialized indicator designed to automatically identify key trading zones for newly listed cryptocurrencies.
 
