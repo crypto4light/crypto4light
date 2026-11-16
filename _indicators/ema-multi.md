@@ -1,33 +1,40 @@
 ---
-layout: indicator
-title: "Ema Multi"
-description: "Explore the Crypto4light Ema Multi proprietary TradingView indicator. Learn about its features, chart applications and practical trading use cases."
+title: Ema Multi
+description: Explore the Crypto4light Ema Multi proprietary TradingView
+  indicator. Learn about its features, chart applications and practical trading
+  use cases.
 permalink: /indicators/ema-multi/
-order: 11
-access: free
-tradingview_url: "https://www.tradingview.com/script/wF7C5fUS-Crypto4light-EMA-Multi/"
+access: FREE
 keywords:
   - Ema Multi Indicator
   - Multiple EMA Indicator
   - TradingView EMA
   - Moving Average Indicator
   - Crypto4light
+image: /assets/images/uploads/emamulti.png
+youtube_id: wtEl_H5krq0
+layout: indicator
+order: 11
+tradingview_url: https://www.tradingview.com/script/wF7C5fUS-Crypto4light-EMA-Multi/
 ---
+## Custom EMA Toolkit – Multiple Moving Averages in One Indicator
 
-## Overview
+A simple yet versatile EMA indicator that combines multiple customizable Exponential Moving Averages into one convenient tool.
 
-Discover the Ema Multi indicator by Crypto4light.
+**Custom EMA Settings**
 
-This tutorial introduces the indicator and explains its features and potential applications in cryptocurrency market analysis.
+The indicator includes three non-standard EMAs by default: 13, 25, and 32. You can easily adjust their periods, customize colors, and independently show or hide each EMA directly from the settings.
 
-## How to Use Ema Multi
+**Standard EMA Levels**
 
-Learn how to interpret the indicator and incorporate its information into your trading analysis.
+You can also enable three widely used moving averages: EMA 50, EMA 100, and EMA 200. Combine them with your custom EMAs to analyze market trends, momentum, and potential support or resistance areas.
 
-## Indicator Settings
+**Individual Alerts & Notifications**
 
-A detailed explanation of the available settings and customization options will be added here.
+Stay informed with separate alerts for each EMA. Enable notifications to monitor important EMA events without constantly watching the chart.
 
-## Video Tutorial
+**Simple. Flexible. Convenient.**
 
-A video tutorial will be available here soon.
+Keep all your essential moving averages in one indicator, reduce chart clutter, and customize your EMA setup to match your trading strategy.
+
+Whether you trade short-term movements or analyze higher-timeframe trends, this toolkit gives you the flexibility to work with multiple EMAs in one place.
