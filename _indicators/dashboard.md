@@ -19,7 +19,7 @@ tradingview_url: https://www.tradingview.com/script/7kbLgxCv-Crypto4light-Dashbo
 ---
 ## Multi-Indicator Trading Dashboard
 
-A powerful dashboard that brings data from all 6 Crypto4light indicators into one convenient table, allowing you to monitor multiple indicator readings across different timeframes without overcrowding your chart.
+A powerful dashboard that brings data from all Crypto4light indicators into one convenient table, allowing you to monitor multiple indicator readings across different timeframes without overcrowding your chart.
 
 **Customize Your Dashboard**
 
@@ -35,4 +35,4 @@ Whether you trade on 4H, analyze daily trends, or scalp on minute charts, the da
 
 The table is designed for excellent readability on both desktop and mobile devices.
 
-**Important:** This is not a standalone indicator and does not generate independent trading signals. It is an additional dashboard designed exclusively to display data from the 6 Crypto4light indicators.
+**Important:** This is not a standalone indicator and does not generate independent trading signals. It is an additional dashboard designed exclusively to display data from the Crypto4light indicators.
