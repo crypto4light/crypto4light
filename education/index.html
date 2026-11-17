@@ -1,3 +1,4 @@
+
 ---
 layout: default
 title: Crypto Education & Tutorials
@@ -113,6 +114,13 @@ permalink: /education/
       <h3>No tutorials found.</h3>
       <p>Try another search term or keyword.</p>
     </div>
+
+    <nav
+      class="education-pagination"
+      id="educationPagination"
+      aria-label="Education pages"
+      hidden
+    ></nav>
 
   </div>
 </section>
@@ -323,6 +331,60 @@ permalink: /education/
   color: var(--text-secondary, #999);
 }
 
+/* PAGINATION */
+
+.education-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 38px;
+}
+
+.education-pagination[hidden] {
+  display: none !important;
+}
+
+.education-page-btn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px;
+  background: rgba(255,255,255,0.035);
+  color: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.education-page-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.35);
+}
+
+.education-page-btn.active {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.45);
+  font-weight: 600;
+}
+
+.education-page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.education-page-ellipsis {
+  color: var(--text-secondary, #999);
+  padding: 0 3px;
+  font-size: 13px;
+}
+
 /* TABLET */
 
 @media (max-width: 900px) {
@@ -365,6 +427,17 @@ permalink: /education/
     gap: 18px !important;
   }
 
+  .education-pagination {
+    gap: 6px;
+    margin-top: 28px;
+  }
+
+  .education-page-btn {
+    min-width: 34px;
+    height: 36px;
+    padding: 0 8px;
+  }
+
 }
 
 </style>
@@ -378,14 +451,19 @@ document.addEventListener("DOMContentLoaded", function() {
   const sort = document.getElementById("educationSort");
   const count = document.getElementById("educationCount");
   const noResults = document.getElementById("educationNoResults");
+  const pagination = document.getElementById("educationPagination");
 
-  if (!gallery || !search || !sort) return;
+  if (!gallery || !search || !sort || !pagination) return;
+
+  const POSTS_PER_PAGE = 9;
 
   const cards = Array.from(
     gallery.querySelectorAll(".education-card")
   );
 
-  function updateGallery() {
+  let currentPage = 1;
+
+  function getFilteredCards() {
 
     const query = search.value.trim().toLowerCase();
     const sortOrder = sort.value;
@@ -393,9 +471,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const filteredCards = cards.filter(function(card) {
 
       const searchableText = [
-        card.dataset.title,
-        card.dataset.description,
-        card.dataset.keywords
+        card.dataset.title || "",
+        card.dataset.description || "",
+        card.dataset.keywords || ""
       ].join(" ").toLowerCase();
 
       return searchableText.includes(query);
@@ -415,25 +493,159 @@ document.addEventListener("DOMContentLoaded", function() {
 
     });
 
+    return filteredCards;
+
+  }
+
+  function createPageButton(label, page, options) {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "education-page-btn";
+    button.textContent = label;
+
+    if (options && options.active) {
+      button.classList.add("active");
+      button.setAttribute("aria-current", "page");
+    }
+
+    if (options && options.disabled) {
+      button.disabled = true;
+    }
+
+    button.addEventListener("click", function() {
+
+      currentPage = page;
+      updateGallery();
+
+      document.querySelector(".education-toolbar").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    });
+
+    return button;
+
+  }
+
+  function renderPagination(totalPages) {
+
+    pagination.innerHTML = "";
+
+    if (totalPages <= 1) {
+      pagination.hidden = true;
+      return;
+    }
+
+    pagination.hidden = false;
+
+    pagination.appendChild(
+      createPageButton("←", Math.max(1, currentPage - 1), {
+        disabled: currentPage === 1
+      })
+    );
+
+    let pages = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+
+      if (
+        i === 1 ||
+        i === totalPages ||
+        Math.abs(i - currentPage) <= 1
+      ) {
+        pages.push(i);
+      }
+
+    }
+
+    let previousPage = 0;
+
+    pages.forEach(function(page) {
+
+      if (previousPage && page - previousPage > 1) {
+
+        const dots = document.createElement("span");
+        dots.className = "education-page-ellipsis";
+        dots.textContent = "...";
+
+        pagination.appendChild(dots);
+
+      }
+
+      pagination.appendChild(
+        createPageButton(String(page), page, {
+          active: page === currentPage
+        })
+      );
+
+      previousPage = page;
+
+    });
+
+    pagination.appendChild(
+      createPageButton("→", Math.min(totalPages, currentPage + 1), {
+        disabled: currentPage === totalPages
+      })
+    );
+
+  }
+
+  function updateGallery() {
+
+    const filteredCards = getFilteredCards();
+
+    const totalCards = filteredCards.length;
+    const totalPages = Math.ceil(totalCards / POSTS_PER_PAGE);
+
+    if (currentPage > totalPages) {
+      currentPage = Math.max(1, totalPages);
+    }
+
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const endIndex = startIndex + POSTS_PER_PAGE;
+
+    const visibleCards = filteredCards.slice(startIndex, endIndex);
+
     cards.forEach(function(card) {
       card.style.display = "none";
     });
 
-    filteredCards.forEach(function(card) {
+    visibleCards.forEach(function(card) {
       card.style.display = "";
       gallery.appendChild(card);
     });
 
-    count.textContent =
-      "Showing " + filteredCards.length +
-      " of " + cards.length + " tutorials";
+    if (totalCards === 0) {
 
-    noResults.hidden = filteredCards.length !== 0;
+      count.textContent = "Showing 0 of " + cards.length + " tutorials";
+
+    } else {
+
+      count.textContent =
+        "Showing " + (startIndex + 1) +
+        "–" + Math.min(endIndex, totalCards) +
+        " of " + totalCards + " tutorials";
+
+    }
+
+    noResults.hidden = totalCards !== 0;
+
+    renderPagination(totalPages);
 
   }
 
-  search.addEventListener("input", updateGallery);
-  sort.addEventListener("change", updateGallery);
+  search.addEventListener("input", function() {
+    currentPage = 1;
+    updateGallery();
+  });
+
+  sort.addEventListener("change", function() {
+    currentPage = 1;
+    updateGallery();
+  });
 
   updateGallery();
 
