@@ -16,7 +16,7 @@ order: 2
 image: /assets/images/uploads/sessions.jpg
 tradingview_url: https://www.tradingview.com/script/xLr2TbRm-Crypto4light-Trading-Sessions-Levels/
 ---
-# Smart Money Concepts – Trading Sessions & Key Levels
+## Smart Money Concepts – Trading Sessions & Key Levels
 
 This indicator combines major trading sessions with essential intraday and higher-timeframe reference levels, helping you keep your chart organized and focus on the price levels that matter.
 
