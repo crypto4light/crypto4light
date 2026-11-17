@@ -1,31 +1,92 @@
 ---
-layout: indicator
-title: "Take Profit"
-description: "Explore the Crypto4light Take Profit proprietary TradingView indicator. Learn about its features, chart applications and practical trading use cases."
+title: Take Profit
+description: Explore the Crypto4light Take Profit proprietary TradingView
+  indicator. Learn about its features, chart applications and practical trading
+  use cases.
 permalink: /indicators/take-profit/
-order: 8
+access: PREMIUM
 keywords:
   - Take Profit Indicator
   - TradingView Take Profit
   - Crypto Trading Tools
   - Profit Target Indicator
   - Crypto4light
+layout: indicator
+order: 8
+image: /assets/images/uploads/takeprofit.png
+tradingview_url: https://www.tradingview.com/script/0FtnPFYJ-Crypto4light-Take-Profit/
 ---
+## Crypto4light Take Profit – Fundamental Value, Buy & Take Profit Levels
 
-## Overview
+Crypto4light Take Profit is designed for investors and swing traders who want to identify potential accumulation areas, evaluate how far an asset is trading above or below its estimated fundamental value, and define potential profit-taking levels.
 
-Discover the Take Profit indicator by Crypto4light.
+The indicator can be used for both **spot and futures trading**, offering a structured approach to position building, partial profit-taking, and trade exits.
 
-This tutorial introduces the indicator and explains its features and potential applications in cryptocurrency trading.
+Its levels are dynamic and adjust to market conditions, helping traders evaluate an asset throughout different market cycles.
 
-## How to Use Take Profit
+## Understanding the Indicator Levels
 
-Learn how to interpret the indicator and incorporate its information into your trading strategy and trade management.
+The indicator displays four key levels:
 
-## Indicator Settings
+**1. Buy – Potential Entry Zone**
 
-A detailed explanation of the available settings and customization options will be added here.
+The lower Buy line identifies a potential area to enter a position or gradually build an investment position as the price declines.
 
-## Video Tutorial
+For investors, this level can be used to identify periods when an asset becomes relatively inexpensive compared to its calculated value.
 
-A video tutorial will be available here soon.
+**2. Fundamental Value – Estimated Real Value**
+
+The lower green line represents the asset's estimated fundamental value.
+
+Market sentiment, negative news, low demand, or a lack of investor interest can push an asset's market price below this level.
+
+Historically, such situations can create interesting long-term accumulation opportunities, although a price trading below this line does not guarantee a recovery.
+
+**3. Take Profit – Partial Profit-Taking Zone**
+
+The upper Take Profit line identifies a potential area to lock in profits or close a position.
+
+Swing traders can use this level to take partial or full profits. Futures traders may also consider it when evaluating potential short opportunities, depending on market conditions and their trading strategy.
+
+**4. Exit – Final Exit Level**
+
+The upper Exit line identifies a potential level to close 100% of a trading position.
+
+However, long-term investors do not necessarily need to exit their entire investment when the price reaches this level. Since the indicator's levels are dynamic and adjust to market cycles, investors may use them to evaluate changing market conditions and manage their positions over time.
+
+## Multi-Timeframe Analysis
+
+The indicator can be applied to different timeframes, but its strongest intended use is on the **1D timeframe**.
+
+The Fundamental Value level is calculated and displayed specifically on the daily timeframe, providing investors with a reference point for evaluating an asset's estimated value.
+
+For long-term investors, the daily chart can help identify potential accumulation opportunities when the market price approaches or falls below the Fundamental Value level.
+
+For swing traders, the levels provide a framework for identifying potential entries, profit-taking areas, and exit points.
+
+## Market Valuation & Historical Price Behavior
+
+One of the main purposes of Crypto4light Take Profit is to help evaluate how far an asset's market price has moved away from its estimated fundamental value.
+
+When an asset experiences a strong rally and trades significantly above its estimated value, the indicator helps identify potential areas where traders may consider taking profits.
+
+Historically, assets can return toward their estimated value after periods of excessive price expansion. These movements can create opportunities for both investment accumulation and shorter-term speculation.
+
+## Customization
+
+* Adjustable line colors to match light and dark chart themes.
+* Visual distinction between potential buying and profit-taking zones.
+* Dynamic levels that adapt to changing market conditions.
+
+## Alerts
+
+The indicator includes four alert conditions:
+
+* **Buy Line** – Price touches or crosses the Buy level.
+* **Fundamental Price** – Price touches or crosses the Fundamental Value level.
+* **Take Profit Line** – Price touches or crosses the Take Profit level.
+* **Exit Line** – Price touches or crosses the Exit level.
+
+Alerts are available across timeframes and can help monitor important price levels without constantly watching the chart.
+
+**Important:** Crypto4light Take Profit is an analytical tool, not an automated trading system or a guarantee of profitable trades. Fundamental Value represents an estimated reference level generated by the indicator, not an independently verified intrinsic value. Always combine its readings with your own analysis and risk management.
