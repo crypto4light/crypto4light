@@ -39,6 +39,10 @@ permalink: /market-analysis/
 
     </div>
 
+    <div class="analysis-results" id="analysisResults">
+      Loading market analyses...
+    </div>
+
     <div class="analysis-grid" id="analysisGrid">
       <!-- Video entries are generated automatically -->
     </div>
@@ -47,6 +51,13 @@ permalink: /market-analysis/
       <h2>No analyses found</h2>
       <p>Try another ticker or keyword.</p>
     </div>
+
+    <nav
+      class="analysis-pagination"
+      id="analysisPagination"
+      aria-label="Market analysis pages"
+      hidden
+    ></nav>
 
   </div>
 </section>
@@ -141,6 +152,14 @@ permalink: /market-analysis/
   font-size: 12px;
 }
 
+.analysis-results {
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #929EAC;
+}
+
+/* ANALYSIS GRID */
+
 .analysis-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -200,6 +219,8 @@ permalink: /market-analysis/
   font-weight: 600;
 }
 
+/* EMPTY STATE */
+
 .analysis-empty {
   text-align: center;
   padding: 55px 20px;
@@ -209,6 +230,63 @@ permalink: /market-analysis/
 .analysis-empty h2 {
   color: #F0F3F6;
 }
+
+/* PAGINATION */
+
+.analysis-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 38px;
+}
+
+.analysis-pagination[hidden] {
+  display: none !important;
+}
+
+.analysis-page-btn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px;
+  background: rgba(255,255,255,0.035);
+  color: #F0F3F6;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+
+.analysis-page-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.35);
+}
+
+.analysis-page-btn.active {
+  background: rgba(255,212,59,0.12);
+  border-color: #FFD43B;
+  color: #FFD43B;
+  font-weight: 600;
+}
+
+.analysis-page-btn:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.analysis-page-ellipsis {
+  color: #929EAC;
+  padding: 0 3px;
+  font-size: 13px;
+}
+
+/* TABLET */
 
 @media (max-width: 950px) {
   .analysis-grid {
@@ -222,7 +300,10 @@ permalink: /market-analysis/
   }
 }
 
+/* MOBILE */
+
 @media (max-width: 600px) {
+
   .analysis-grid {
     grid-template-columns: 1fr;
   }
@@ -236,11 +317,24 @@ permalink: /market-analysis/
   .market-heading {
     margin-bottom: 18px;
   }
+
+  .analysis-pagination {
+    gap: 6px;
+    margin-top: 28px;
+  }
+
+  .analysis-page-btn {
+    min-width: 34px;
+    height: 36px;
+    padding: 0 8px;
+  }
+
 }
 </style>
 
 <script>
 (function () {
+
   const videos = [
     {% assign sorted_videos = site.market_analysis | sort: "date" | reverse %}
     {% for video in sorted_videos %}
@@ -256,12 +350,18 @@ permalink: /market-analysis/
     {% endfor %}
   ];
 
+  const POSTS_PER_PAGE = 9;
+
   const grid = document.getElementById("analysisGrid");
   const search = document.getElementById("analysisSearch");
   const sort = document.getElementById("analysisSort");
   const empty = document.getElementById("analysisEmpty");
+  const results = document.getElementById("analysisResults");
+  const pagination = document.getElementById("analysisPagination");
 
-  if (!grid || !search || !sort || !empty) return;
+  if (!grid || !search || !sort || !empty || !results || !pagination) return;
+
+  let currentPage = 1;
 
   function toSearchText(value) {
     if (Array.isArray(value)) {
@@ -271,10 +371,12 @@ permalink: /market-analysis/
     return value || "";
   }
 
-  function render() {
+  function getFilteredVideos() {
+
     const query = search.value.trim().toLowerCase();
 
     let filtered = videos.filter(video => {
+
       const searchable = [
         video.title,
         video.description,
@@ -283,49 +385,220 @@ permalink: /market-analysis/
       ].join(" ").toLowerCase();
 
       return searchable.includes(query);
+
     });
 
     filtered.sort((a, b) => {
+
+      const dateA = a.date || "";
+      const dateB = b.date || "";
+
       return sort.value === "newest"
-        ? b.date.localeCompare(a.date)
-        : a.date.localeCompare(b.date);
+        ? dateB.localeCompare(dateA)
+        : dateA.localeCompare(dateB);
+
     });
 
-    grid.innerHTML = filtered.map(video => {
+    return filtered;
+
+  }
+
+  function escapeHTML(value) {
+
+    return String(value || "").replace(/[&<>"']/g, function(char) {
+
+      const entities = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      };
+
+      return entities[char];
+
+    });
+
+  }
+
+  function createPageButton(label, page, options) {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "analysis-page-btn";
+    button.textContent = label;
+
+    if (options && options.active) {
+      button.classList.add("active");
+      button.setAttribute("aria-current", "page");
+    }
+
+    if (options && options.disabled) {
+      button.disabled = true;
+    }
+
+    button.addEventListener("click", function() {
+
+      currentPage = page;
+      render();
+
+      const controls = document.querySelector(".analysis-controls");
+
+      if (controls) {
+        controls.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+    });
+
+    return button;
+
+  }
+
+  function renderPagination(totalPages) {
+
+    pagination.innerHTML = "";
+
+    if (totalPages <= 1) {
+      pagination.hidden = true;
+      return;
+    }
+
+    pagination.hidden = false;
+
+    pagination.appendChild(
+      createPageButton("←", Math.max(1, currentPage - 1), {
+        disabled: currentPage === 1
+      })
+    );
+
+    const pages = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+
+      if (
+        i === 1 ||
+        i === totalPages ||
+        Math.abs(i - currentPage) <= 1
+      ) {
+        pages.push(i);
+      }
+
+    }
+
+    let previousPage = 0;
+
+    pages.forEach(function(page) {
+
+      if (previousPage && page - previousPage > 1) {
+
+        const dots = document.createElement("span");
+
+        dots.className = "analysis-page-ellipsis";
+        dots.textContent = "...";
+
+        pagination.appendChild(dots);
+
+      }
+
+      pagination.appendChild(
+        createPageButton(String(page), page, {
+          active: page === currentPage
+        })
+      );
+
+      previousPage = page;
+
+    });
+
+    pagination.appendChild(
+      createPageButton("→", Math.min(totalPages, currentPage + 1), {
+        disabled: currentPage === totalPages
+      })
+    );
+
+  }
+
+  function render() {
+
+    const filtered = getFilteredVideos();
+
+    const totalVideos = filtered.length;
+    const totalPages = Math.ceil(totalVideos / POSTS_PER_PAGE);
+
+    if (currentPage > totalPages) {
+      currentPage = Math.max(1, totalPages);
+    }
+
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const endIndex = startIndex + POSTS_PER_PAGE;
+
+    const visibleVideos = filtered.slice(startIndex, endIndex);
+
+    grid.innerHTML = visibleVideos.map(video => {
+
       const videoId = video.youtubeId;
 
       const thumbnail = videoId
-        ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+        ? `https://img.youtube.com/vi/${encodeURIComponent(videoId)}/maxresdefault.jpg`
         : "";
 
       const imageHTML = videoId
         ? `<img
             src="${thumbnail}"
-            alt="${video.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"
+            alt="${escapeHTML(video.title)}"
             loading="lazy"
-            onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"
+            onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg';"
           >`
         : "";
 
       return `
-        <a class="analysis-card" href="${video.url}">
+        <a class="analysis-card" href="${escapeHTML(video.url)}">
           ${imageHTML}
           <div class="analysis-card-content">
-            <div class="analysis-card-date">${video.date}</div>
-            <h2>${video.title}</h2>
-            <p>${video.description || ""}</p>
+            <div class="analysis-card-date">${escapeHTML(video.date)}</div>
+            <h2>${escapeHTML(video.title)}</h2>
+            <p>${escapeHTML(video.description || "")}</p>
             <span class="analysis-card-link">Read Analysis →</span>
           </div>
         </a>
       `;
+
     }).join("");
 
-    empty.hidden = filtered.length !== 0;
+    if (totalVideos === 0) {
+
+      results.textContent = "Showing 0 of " + videos.length + " analyses";
+
+    } else {
+
+      results.textContent =
+        "Showing " + (startIndex + 1) +
+        "–" + Math.min(endIndex, totalVideos) +
+        " of " + totalVideos + " analyses";
+
+    }
+
+    empty.hidden = totalVideos !== 0;
+
+    renderPagination(totalPages);
+
   }
 
-  search.addEventListener("input", render);
-  sort.addEventListener("change", render);
+  search.addEventListener("input", function() {
+    currentPage = 1;
+    render();
+  });
+
+  sort.addEventListener("change", function() {
+    currentPage = 1;
+    render();
+  });
 
   render();
+
 })();
 </script>
