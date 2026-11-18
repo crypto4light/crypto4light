@@ -236,6 +236,12 @@ permalink: /education/
   text-decoration: none;
 }
 
+/* IMPORTANT: hidden cards must stay hidden despite display:flex !important */
+
+.education-card[hidden] {
+  display: none !important;
+}
+
 .education-thumbnail {
   position: relative;
   width: 100%;
@@ -460,6 +466,13 @@ document.addEventListener("DOMContentLoaded", function() {
     gallery.querySelectorAll(".education-card")
   );
 
+  // Keep the original order as a stable tie-breaker for identical dates.
+  const originalOrder = new Map(
+    cards.map(function(card, index) {
+      return [card, index];
+    })
+  );
+
   let currentPage = 1;
 
   function getFilteredCards() {
@@ -483,6 +496,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
       const dateA = a.dataset.date || "";
       const dateB = b.dataset.date || "";
+
+      // Cards without dates always go last.
+      if (!dateA && dateB) return 1;
+      if (dateA && !dateB) return -1;
+
+      // Preserve original order when dates are identical.
+      if (dateA === dateB) {
+        return originalOrder.get(a) - originalOrder.get(b);
+      }
 
       if (sortOrder === "oldest") {
         return dateA.localeCompare(dateB);
@@ -604,17 +626,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-    const endIndex = startIndex + POSTS_PER_PAGE;
+    const endIndex = Math.min(startIndex + POSTS_PER_PAGE, totalCards);
 
-    const visibleCards = filteredCards.slice(startIndex, endIndex);
-
+    // First hide every card.
     cards.forEach(function(card) {
-      card.style.display = "none";
+      card.hidden = true;
     });
 
-    visibleCards.forEach(function(card) {
-      card.style.display = "";
+    // Reorder all matching cards and show only the current page.
+    filteredCards.forEach(function(card, index) {
+
       gallery.appendChild(card);
+
+      card.hidden = index < startIndex || index >= endIndex;
+
     });
 
     if (totalCards === 0) {
@@ -625,7 +650,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       count.textContent =
         "Showing " + (startIndex + 1) +
-        "–" + Math.min(endIndex, totalCards) +
+        "–" + endIndex +
         " of " + totalCards + " tutorials";
 
     }
