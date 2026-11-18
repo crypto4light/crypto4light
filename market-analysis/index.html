@@ -363,6 +363,13 @@ permalink: /market-analysis/
 
   let currentPage = 1;
 
+  // Preserve the original order when two publications have the same date.
+  const originalOrder = new Map(
+    videos.map(function(video, index) {
+      return [video, index];
+    })
+  );
+
   function toSearchText(value) {
     if (Array.isArray(value)) {
       return value.join(" ");
@@ -393,9 +400,20 @@ permalink: /market-analysis/
       const dateA = a.date || "";
       const dateB = b.date || "";
 
-      return sort.value === "newest"
-        ? dateB.localeCompare(dateA)
-        : dateA.localeCompare(dateB);
+      // Publications without dates always appear last.
+      if (!dateA && dateB) return 1;
+      if (dateA && !dateB) return -1;
+
+      // Keep the original order for publications with identical dates.
+      if (dateA === dateB) {
+        return originalOrder.get(a) - originalOrder.get(b);
+      }
+
+      if (sort.value === "oldest") {
+        return dateA.localeCompare(dateB);
+      }
+
+      return dateB.localeCompare(dateA);
 
     });
 
@@ -534,10 +552,12 @@ permalink: /market-analysis/
     }
 
     const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-    const endIndex = startIndex + POSTS_PER_PAGE;
+    const endIndex = Math.min(startIndex + POSTS_PER_PAGE, totalVideos);
 
+    // Select only the publications belonging to the current page.
     const visibleVideos = filtered.slice(startIndex, endIndex);
 
+    // Rebuild the grid using only the selected page.
     grid.innerHTML = visibleVideos.map(video => {
 
       const videoId = video.youtubeId;
@@ -577,7 +597,7 @@ permalink: /market-analysis/
 
       results.textContent =
         "Showing " + (startIndex + 1) +
-        "–" + Math.min(endIndex, totalVideos) +
+        "–" + endIndex +
         " of " + totalVideos + " analyses";
 
     }
