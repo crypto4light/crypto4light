@@ -15,7 +15,7 @@ image: /assets/images/uploads/emamulti.png
 youtube_id: wtEl_H5krq0
 layout: indicator
 order: 11
-tradingview_url: https://www.tradingview.com/script/wF7C5fUS-Crypto4light-EMA-Multi/
+tradingview_url: https://www.tradingview.com/script/mKjqXwGi-Crypto4light-EMA-Multi/
 ---
 ## Custom EMA Toolkit – Multiple Moving Averages in One Indicator
 
