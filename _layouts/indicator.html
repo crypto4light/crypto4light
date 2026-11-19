@@ -31,6 +31,23 @@ layout: default
         </div>
 
       </div>
+    {% elsif page.access == "PREMIUM" %}
+      <div class="indicator-access">
+
+        <a
+          href="https://t.me/crypto4lightfounder"
+          class="indicator-access-button indicator-access-button-premium"
+          target="_blank"
+          rel="noopener noreferrer">
+          GET ACCESS <span>↗</span>
+        </a>
+
+        <div class="indicator-premium-info">
+          <span>Full access to all 9 Premium Indicators.</span>
+          <span>Use code <strong>4LIGHT</strong> and get <strong>10% OFF your purchase.</strong></span>
+        </div>
+
+      </div>
     {% endif %}
 
     {% if page.youtube_id %}
@@ -129,7 +146,7 @@ layout: default
   margin: 14px 0;
 }
 
-/* FREE INDICATOR ACCESS */
+/* INDICATOR ACCESS */
 
 .indicator-access {
   display: flex;
@@ -170,6 +187,8 @@ layout: default
   font-size: 15px;
 }
 
+/* FREE ACCESS INFO */
+
 .indicator-favorites {
   display: flex;
   align-items: center;
@@ -183,6 +202,32 @@ layout: default
   color: #FFD43B;
   font-size: 19px;
   line-height: 1;
+}
+
+/* PREMIUM ACCESS */
+
+.indicator-access-button-premium {
+  background: #16A34A;
+  color: #FFFFFF !important;
+}
+
+.indicator-access-button-premium:hover {
+  background: #15803D;
+  color: #FFFFFF !important;
+}
+
+.indicator-premium-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #AAB3BF;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.indicator-premium-info strong {
+  color: #FFFFFF;
+  font-weight: 800;
 }
 
 /* IMAGE AND VIDEO */
