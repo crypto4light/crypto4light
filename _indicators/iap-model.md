@@ -15,7 +15,7 @@ image: /assets/images/uploads/iapmodel.png
 youtube_id: -mQehCFc3Ts
 layout: indicator
 order: 10
-tradingview_url: https://www.tradingview.com/script/GhvgDyhf-Crypto4light-iAP-model/
+tradingview_url: https://www.tradingview.com/script/beFuU5Kw-Crypto4light-iAP-model/
 ---
 ## Custom Automatic Fibonacci Grid for Post-Listing Tokens
 
