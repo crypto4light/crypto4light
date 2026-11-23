@@ -12,11 +12,33 @@ permalink: /indicators/
 
     <h1>Professional TradingView Indicators</h1>
 
-  <p class="lead">
-  It's not magic. It's a tool to work with. Analyze markets, gain deeper insights, identify potential trading opportunities and adapt advanced indicators to your own trading strategy.
-  <br>
-  Better tools don't guarantee profits — how you use them matters.
-  </p>
+    <p class="lead">
+      It's not magic. It's a tool to work with. Analyze markets, gain deeper insights, identify potential trading opportunities and adapt advanced indicators to your own trading strategy.
+      <br>
+      Better tools don't guarantee profits — how you use them matters.
+    </p>
+
+    <!-- PREMIUM ACCESS CTA -->
+    <div class="indicator-cta">
+
+      <a
+        class="indicator-cta-button"
+        href="https://t.me/crypto4lightfounder"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GET ACCESS →
+      </a>
+
+      <span class="indicator-cta-discount">
+        🔥 UP TO 20% OFF
+      </span>
+
+      <span class="indicator-cta-code">
+        Use code: <strong>4LIGHT</strong>
+      </span>
+
+    </div>
 
     <div class="indicator-grid">
 
@@ -90,13 +112,65 @@ permalink: /indicators/
   text-align: center;
 }
 
+/* PREMIUM ACCESS CTA */
+
+.indicator-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 17px auto 0;
+}
+
+.indicator-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background: #16A34A;
+  border: 1px solid #16A34A;
+  border-radius: 6px;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-decoration: none;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+
+.indicator-cta-button:hover {
+  background: #15803D;
+  border-color: #15803D;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.indicator-cta-discount {
+  color: #F0F3F6;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.indicator-cta-code {
+  color: #929EAC;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.indicator-cta-code strong {
+  color: #FFD43B;
+  font-weight: 700;
+}
+
 /* INDICATOR GALLERY */
 
 .indicator-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .indicator-card {
@@ -218,5 +292,19 @@ permalink: /indicators/
   .indicator-grid {
     grid-template-columns: 1fr;
   }
+
+  .indicator-cta {
+    gap: 10px 14px;
+  }
+
+  .indicator-cta-button {
+    padding: 9px 15px;
+  }
+
+  .indicator-cta-discount,
+  .indicator-cta-code {
+    font-size: 12px;
+  }
 }
+
 </style>
