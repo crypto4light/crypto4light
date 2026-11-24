@@ -77,21 +77,10 @@ permalink: /education/
             {% elsif video_id != "" %}
 
               <img
-                src="https://i.ytimg.com/vi/{{ video_id }}/maxresdefault.jpg"
+                src="https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg"
                 alt="{{ article.title | escape }}"
                 loading="lazy"
-                data-fallback="maxres"
-                onerror="
-                  if (this.dataset.fallback === 'maxres') {
-                    this.dataset.fallback = 'sd';
-                    this.src = 'https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg';
-                  } else if (this.dataset.fallback === 'sd') {
-                    this.dataset.fallback = 'hq';
-                    this.src = 'https://i.ytimg.com/vi/{{ video_id }}/hqdefault.jpg';
-                  } else {
-                    this.onerror = null;
-                  }
-                "
+                onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ video_id }}/hqdefault.jpg';"
               >
 
             {% else %}
