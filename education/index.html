@@ -63,18 +63,18 @@ permalink: /education/
 
           <div class="education-thumbnail">
 
-            {% if article.youtube_id %}
+            {% if article.image %}
+              <img
+                src="{{ article.image | relative_url }}"
+                alt="{{ article.title | escape }}"
+                loading="lazy"
+              >
+            {% elsif article.youtube_id %}
               <img
                 src="https://i.ytimg.com/vi/{{ article.youtube_id }}/maxresdefault.jpg"
                 alt="{{ article.title | escape }}"
                 loading="lazy"
                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ article.youtube_id }}/hqdefault.jpg';"
-              >
-            {% elsif article.image %}
-              <img
-                src="{{ article.image | relative_url }}"
-                alt="{{ article.title | escape }}"
-                loading="lazy"
               >
             {% else %}
               <div class="education-placeholder">
