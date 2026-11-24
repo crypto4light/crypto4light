@@ -66,7 +66,9 @@ permalink: /education/
             {% assign cover_image = article.image | default: "" | strip %}
             {% assign video_id = article.youtube_id | default: "" | strip %}
 
-            {% if cover_image != "" %}
+            {% assign default_og_image = "/assets/images/crypto4light-og-image.png" %}
+
+            {% if cover_image != "" and cover_image != default_og_image %}
 
               <img
                 src="{{ cover_image | relative_url }}"
@@ -81,6 +83,14 @@ permalink: /education/
                 alt="{{ article.title | escape }}"
                 loading="lazy"
                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ video_id }}/hqdefault.jpg';"
+              >
+
+            {% elsif cover_image != "" %}
+
+              <img
+                src="{{ cover_image | relative_url }}"
+                alt="{{ article.title | escape }}"
+                loading="lazy"
               >
 
             {% else %}
