@@ -63,27 +63,47 @@ permalink: /education/
 
           <div class="education-thumbnail">
 
-            {% if article.image != blank %}
+            {% assign cover_image = article.image | default: "" | strip %}
+            {% assign video_id = article.youtube_id | default: "" | strip %}
+
+            {% if cover_image != "" %}
+
               <img
-                src="{{ article.image | relative_url }}"
+                src="{{ cover_image | relative_url }}"
                 alt="{{ article.title | escape }}"
                 loading="lazy"
               >
-            {% elsif article.youtube_id != blank %}
+
+            {% elsif video_id != "" %}
+
               <img
-                src="https://i.ytimg.com/vi/{{ article.youtube_id }}/maxresdefault.jpg"
+                src="https://i.ytimg.com/vi/{{ video_id }}/maxresdefault.jpg"
                 alt="{{ article.title | escape }}"
                 loading="lazy"
-                onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ article.youtube_id }}/hqdefault.jpg';"
+                data-fallback="maxres"
+                onerror="
+                  if (this.dataset.fallback === 'maxres') {
+                    this.dataset.fallback = 'sd';
+                    this.src = 'https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg';
+                  } else if (this.dataset.fallback === 'sd') {
+                    this.dataset.fallback = 'hq';
+                    this.src = 'https://i.ytimg.com/vi/{{ video_id }}/hqdefault.jpg';
+                  } else {
+                    this.onerror = null;
+                  }
+                "
               >
+
             {% else %}
+
               <div class="education-placeholder">
                 <span>CRYPTO4LIGHT</span>
                 <strong>EDUCATION</strong>
               </div>
+
             {% endif %}
 
-            {% if article.youtube_id != blank %}
+            {% if video_id != "" %}
               <span class="education-video-label">VIDEO</span>
             {% endif %}
 
@@ -236,7 +256,7 @@ permalink: /education/
   text-decoration: none;
 }
 
-/* IMPORTANT: hidden cards must stay hidden despite display:flex !important */
+/* Keep filtered cards hidden */
 
 .education-card[hidden] {
   display: none !important;
@@ -466,7 +486,6 @@ document.addEventListener("DOMContentLoaded", function() {
     gallery.querySelectorAll(".education-card")
   );
 
-  // Keep the original order as a stable tie-breaker for identical dates.
   const originalOrder = new Map(
     cards.map(function(card, index) {
       return [card, index];
@@ -497,11 +516,9 @@ document.addEventListener("DOMContentLoaded", function() {
       const dateA = a.dataset.date || "";
       const dateB = b.dataset.date || "";
 
-      // Cards without dates always go last.
       if (!dateA && dateB) return 1;
       if (dateA && !dateB) return -1;
 
-      // Preserve original order when dates are identical.
       if (dateA === dateB) {
         return originalOrder.get(a) - originalOrder.get(b);
       }
@@ -628,12 +645,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
     const endIndex = Math.min(startIndex + POSTS_PER_PAGE, totalCards);
 
-    // First hide every card.
     cards.forEach(function(card) {
       card.hidden = true;
     });
 
-    // Reorder all matching cards and show only the current page.
     filteredCards.forEach(function(card, index) {
 
       gallery.appendChild(card);
