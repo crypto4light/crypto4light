@@ -1,6 +1,7 @@
 ---
 title: Trading strategy for Altcoins. Initiation.Accumulation.Pump
 date: 2026-11-26
+youtube_id: zB0bbFmGTGI
 description: "Discover a practical altcoin trading strategy based on three key
   market phases: Initiation, Accumulation, and Pump. Learn how to identify early
   signs of accumulation, recognize when market participants are positioning
